@@ -23,10 +23,17 @@
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
 
+        hashmap = {}
+        res=0
+        k=-1
+        for index, i in enumerate(s):
+            if i in hashmap and hashmap[i] > k:
+                k = hashmap[i]
+            else:
+                res = max(res, index-k)
+            hashmap[i] = index
+        return res
 
 
-
-
-
-a=Solution().lengthOfLongestSubstring('pwwkew')
+a=Solution().lengthOfLongestSubstring('')
 print(a)
