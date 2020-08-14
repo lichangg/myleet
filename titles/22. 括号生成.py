@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-#一颗剪了枝的二叉树, 另外核心判断点:是右括号加入的时机,它始终不会比左括号多
+#一颗剪了枝的二叉树, 另外核心判断点:是右括号加入的时机,它始终不会比左括号多,(深度优先搜索,二叉树),这个貌似没有回溯操作
 class Solution(object):
     def generateParenthesis(self, n):
         """
