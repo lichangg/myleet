@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 # class Solution:
 #     def findMedianSortedArrays(self, nums1, nums2) -> float:
-# 找到两个数组合起来后第k小的数
+# 本质找到两个数组合起来后第k小的数
 def helper(nums1, nums2, k):
     if len(nums1) < len(nums2):
         nums1, nums2 = nums2, nums1  # 保持nums1比较长
