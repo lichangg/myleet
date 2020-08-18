@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
+# 思路:指针滑倒某个位置时,看看前面已经算好的和是不是小于0,小于0就是累赘就直接不要了
 class Solution:
     def maxSubArray(self, nums) -> int:
         if not nums:
