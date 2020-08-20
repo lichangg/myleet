@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
+# 虽然自己写的这个能过,但是好像不太合适
 class Solution:
     def findMin(self, nums) -> int:
         if len(nums) == 1:
