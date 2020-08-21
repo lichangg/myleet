@@ -52,7 +52,7 @@ class MinStack:
         self.min_stack.append(min(x, self.min_stack[-1]))
 
     def pop(self) -> None:
-        # 来个同步pop
+        # 来个同步pop, min_stack的栈顶元素始终在同步追加而保持是最小值
         self.stack.pop()
         self.min_stack.pop()
 

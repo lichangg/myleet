@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 from typing import List
-
+# 学到了
 # 由于存在负数，那么会导致最大的变最小的，最小的变最大的。因此还需要维护当前最小值imin
 # 最小值相当于一直保存着一个可能变最大的一个数
 class Solution:
@@ -21,7 +21,7 @@ class Solution:
 
 
 
-# 我真是吐了,留下了没有技术的泪水
+# 我真是吐了,留下了没有技术的泪水,学到了
 class Solution:
     def maxProduct(self, nums: List[int]) -> int:
         reverse_nums = nums[::-1]

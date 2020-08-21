@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 from utils.util_funcs import TreeNode
-
+# 学到了
 # 从根节点开始的操作
 # 1.如果没有左节点
 #   情形1: 如果有右节点,右节点成为根继续递归

@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
+# 学到了
 # 每个节点可以推得一个重要属性:该节点能够贡献的最大值
 # 而以该节点为根的最大路径和由 [左节点的最大贡献值(为正才计入) + 右节点的最大贡献值(为正才计入) + 该节点的值] 得到
 from utils.util_funcs import TreeNode, Tree

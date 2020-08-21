@@ -19,7 +19,7 @@
 #
 #                 cur_max = max(heights[l]*(r-l),cur_max)
 #                 r+=1
-
+# 学到了
 # 思路找到每一个索引向两侧扩散能得到的最大面积, 再在这些最大面积中取最大的
 # 具体操作是以当前i为中心向左右分别找到第一个比heights[i]小的柱子索引,这样就保证了左右两极限索引中间的最大柱子始终为(right_i - left_i - 1) * heights[i]
 class Solution:

@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
+# 学到了
 # 又是经典动态规划, 初始化第一列和第一行后进行计算
 class Solution:
     def minDistance(self, word1: str, word2: str) -> int:

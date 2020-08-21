@@ -15,6 +15,7 @@
 #                 dynamic_hashmap[c] -= 1
 #                 l = index
 
+# 学到了
 #思路: 用counter动态总计还需要多少字符,用hashmap动态计算每个字符还需要多少个
 class Solution:
     def minWindow(self, s: str, t: str) -> str:

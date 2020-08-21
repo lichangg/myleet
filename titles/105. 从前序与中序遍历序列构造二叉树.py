@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 from utils.util_funcs import TreeNode, Tree
+# 学到了
 # 要明确一点是先序遍历(或后序遍历)和中序遍历出来的数组结果的索引实际上是有关联的
 # 例如
 # 先序[3,9,1,8,20,15,7]

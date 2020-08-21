@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
+# 学到了
 #遍历得到每个点所能达到的最大位置
 class Solution:
     def canJump(self, nums) :

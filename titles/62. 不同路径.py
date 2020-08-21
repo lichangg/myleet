@@ -49,7 +49,7 @@ class Solution:
                 matrix[j] += matrix[j-1]
 
         return matrix[-1]
-
+# 学到了
 #我真傻啊，之前还想着递归去填每个位置的方法数，直接for循环填不香么，这种方式是竖着填下来的
 # class Solution:
 #     def uniquePaths(self, m: int, n: int) -> int:

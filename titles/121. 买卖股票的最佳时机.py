@@ -15,7 +15,7 @@ class Solution:
             else:
                 max_profit = max(max_profit, prices[i] - prices[l])
         return max_profit
-
+# 学到了
 # 用动态规划 dp[i] 表示前 ii 天的最大利润，因为我们始终要使利润最大化，则：
 # dp[i]=max(dp[i−1],prices[i]−minprice)
 

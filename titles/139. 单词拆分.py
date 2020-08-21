@@ -51,7 +51,7 @@ class Solution:
             return res
         return back_track(s)
 
-# 动态规划
+# 动态规划,学到了
 # 初始化 dp=[False,⋯,False]，长度为 n+1。n 为字符串长度。dp[i]dp[i] 表示 s 的前 i 位是否可以用 wordDict 中的单词表示。
 # 初始化 dp[0]=True，空字符可以被表示。
 # 遍历字符串的所有子串，遍历开始索引 i，遍历区间 [0,n)：
