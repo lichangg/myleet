@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
+# 有空看
 # trie数结构可以1. 自动补全2. 拼写检查3. IP 路由 (最长前缀匹配)4. T9 (九宫格) 打字预测等等, 其作用还有与hash表还有平衡树的区别可以参考这个
 # https://leetcode-cn.com/problems/implement-trie-prefix-tree/solution/shi-xian-trie-qian-zhui-shu-by-leetcode/
 class Node:

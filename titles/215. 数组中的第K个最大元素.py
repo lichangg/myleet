@@ -2,8 +2,8 @@
 # -*- coding:utf-8 -*-
 import heapq
 from typing import List
-
-
+# 堆是一种完全二叉树
+# 构建一个小根堆，该数据结构的特点是始终将最小的放在第0个元素上，之后的元素并不保证
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
         heap = []

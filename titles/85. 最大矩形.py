@@ -39,9 +39,38 @@
 # 第二层柱状图的高度["2","0","2","1","1"]，最大面积为3；
 # 第三层柱状图的高度["3","1","3","2","2"]，最大面积为6；
 # 第四层柱状图的高度["4","0","0","3","0"]，最大面积为4；
-# class Solution:
-#     def maximalRectangle(self, matrix) -> int:
+class Solution:
+    # 该方法即是84题的方法
+    def largestRectangleArea(self, heights):
+        res = 0
+        n = len(heights)
+        for i in range(n):
+            left_i = i
+            right_i = i
+            while left_i >= 0 and heights[left_i] >= heights[i]:
+                left_i -= 1
+            while right_i < n and heights[right_i] >= heights[i]:
+                right_i += 1
+            res = max(res, (right_i - left_i - 1) * heights[i])
+        return res
+    def maximalRectangle(self, matrix) -> int:
+        if not matrix:
+            return 0
+        m = len(matrix)
+        n = len(matrix[0])
+        temp = [[ 0 for x in range(n)] for y in range(m) ]
+        for i in range(m):
 
+            for j in range(n):
+                if matrix[i][j] != '0':
+                    temp[i][j] = temp[i-1][j] + 1 if i >0 else 1
+                else:
+                    temp[i][j] = 0
+        max_area = 0
+        for l in temp:
+            area = self.largestRectangleArea(l)
+            max_area = max(max_area, area)
+        return max_area
 b = [
     ["1", "0", "1", "0", "0"],
     ["1", "0", "1", "1", "1"],
@@ -52,5 +81,5 @@ b = [
 #     ["1", "0", "1"],
 #     ["1", "0", "1"],
 # ]
-# a = Solution().maximalRectangle(b)
-# print(a)
+a = Solution().maximalRectangle([[1]])
+print(a)
