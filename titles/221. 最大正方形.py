@@ -86,7 +86,7 @@ class Solution:
         maxSquare = maxSide * maxSide
         return maxSquare
 
-
+#动态规划，遍历每一个位置，如果为1，得到它的最大边长，最大边长就是最大正方形
 class Solution:
     def maximalSquare(self, matrix: List[List[str]]) -> int:
         if len(matrix) == 0 or len(matrix[0]) == 0:
