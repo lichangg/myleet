@@ -35,5 +35,6 @@ class Solution:
                 left = mid + 1
         return left
 
+# 还有一个思路是借鉴快慢指针判环通过Floyd 判圈算法来实现,暂时没看懂
 a=Solution().findDuplicate([1,3,4,2,2])
 print(a)
