@@ -1,12 +1,11 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
 
 
 # 整个流程是从链头(也就是个位数)依次往高位计算并带上进位
+from utils.util_funcs import ListNode
+
+
 class Solution:
     def addTwoNumbers(self, l1: ListNode, l2: ListNode, carry=0) -> ListNode:
         if l1 == None and l2 == None and carry == 0:
