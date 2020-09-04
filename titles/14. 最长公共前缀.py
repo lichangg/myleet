@@ -39,8 +39,33 @@ class Solution:
 
         return "" if not strs else lcp(0, len(strs) - 1)
 
+# 自己写的
+class Solution:
+    def get_common(self,s1,s2):
+        i,j = 0, 0
+        n1 = len(s1)
+        n2 = len(s2)
+        common = ''
+        while i<n1 and j<n2 and s1[i] == s2[j]:
+            common += s1[i]
+            i+=1
+            j+=1
+        return common
+    def longestCommonPrefix(self, strs) -> str:
+        i = 1
+        if not strs:
+            return ''
+        cur_prefix = strs[0]
+        while i < len(strs):
+            cur_prefix = self.get_common(cur_prefix, strs[i])
+            if not cur_prefix:
+                return ''
+            i+=1
+        return cur_prefix
 
 
-a=Solution().longestCommonPrefix(["flower","flow","floght"])
+
+
+a=Solution().longestCommonPrefix(["c","c"])
 print(a)
 

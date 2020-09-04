@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
+# 重点题型
 # class Solution:
 #     def findMedianSortedArrays(self, nums1, nums2) -> float:
 # 本质找到两个数组合起来后第k小的数
