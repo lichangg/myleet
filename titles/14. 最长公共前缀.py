@@ -22,6 +22,9 @@
 
 #执行用时：48 ms, 在所有 Python3 提交中击败了35.94%的用户
 #内存消耗：13.8 MB, 在所有 Python3 提交中击败了29.86%的用户
+from typing import List
+
+
 class Solution:
     def longestCommonPrefix(self, strs) -> str:
         def lcp(start, end):
@@ -63,7 +66,16 @@ class Solution:
             i+=1
         return cur_prefix
 
-
+# 这是个取巧的办法的， 找出最长和最短的，其公共前缀就是整个数组字符串的公共前缀（为啥不是最短的和次短的）
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        if not strs: return ""
+        str0 = min(strs)
+        str1 = max(strs)
+        for i in range(len(str0)):
+            if str0[i] != str1[i]:
+                return str0[:i]
+        return str0
 
 
 a=Solution().longestCommonPrefix(["c","c"])

@@ -9,6 +9,8 @@ class ListNode:
 # 要仔细考虑删除第一个和最后一个的特殊情况
 # 执行用时：48 ms, 在所有 Python3 提交中击败了34.08%的用户
 # 内存消耗：13.8 MB, 在所有 Python3 提交中击败了18.65%的用户
+# 思路就是用hashmap存下每一个节点，key为index，直接将第len(hashmap) - n-1的next指向len(hashmap) - n + 1
+# 第len(hashmap) - n个就直接丢掉了， 这个思路只用遍历一次
 # class Solution:
 #     def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
 #         index=0
@@ -50,7 +52,14 @@ class Solution:
 
         return dum.next
 
+# 二刷时的思路更low一点,想着先遍历一遍统计出链表的总数，再遍历一遍进行删除。。。
+class Solution:
+    def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
+        count = 0
 
+        while head:
+            count +=1
+            head = head.next
 
 nodes=[ListNode(i) for i in [1,2]]
 for index, i in enumerate(nodes):
