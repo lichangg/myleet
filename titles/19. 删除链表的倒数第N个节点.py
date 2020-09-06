@@ -31,6 +31,8 @@ class ListNode:
 #         return hashmap[0]
 
 # 别人的方法, 可以设置一个虚拟指针, 后面的有点看不懂
+# 二刷时看懂了，原理就是两个指针，假如总共有s个节点，一个指针cur先走了n步，然后两个指针齐步走
+# 当cur走完时也就是它再走了s-n步，pre也会走了s-n步，pre还剩没走，此时也就是倒数第n个节点了，学到了
 class Solution:
     def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
         # 设置虚拟指针的目的是防止删除第一个节点
