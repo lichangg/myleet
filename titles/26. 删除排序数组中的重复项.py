@@ -34,5 +34,19 @@ class Solution:
         print(nums)
         return i + 1
 
-a=Solution().removeDuplicates([1,2,3,3,3,4,5])
+# 二刷
+class Solution:
+    def removeDuplicates(self, nums) -> int:
+        fast = 0
+        slow = 0
+        nums.sort()
+        while fast<len(nums)-1:
+            fast+=1
+            if nums[fast]!=nums[slow]:
+                nums[slow+1] = nums[fast]
+                slow+=1
+        # return len(nums[:slow+1])
+        if not nums:return 0
+        return slow+1
+a=Solution().removeDuplicates([])
 print(a)
