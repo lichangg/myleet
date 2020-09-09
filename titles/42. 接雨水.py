@@ -38,6 +38,9 @@ class Solution:
                 all += self.get_area(height[start:end + 1])
         return all
 
+# 二刷 思路为从左挡板往后找右挡板
+class Solution:
+    def trap(self, height) -> int:
 
 # a=Solution().trap([5,4,1,2])
 a = Solution().get_area([5, 2, 1, 2, 1, 5])

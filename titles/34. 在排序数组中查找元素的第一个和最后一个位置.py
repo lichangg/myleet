@@ -28,8 +28,41 @@
 #                 return [l,r]
 #         return [-1,-1]
 
+# 二刷时直接被二分法的边界问题搞崩溃, 我总是想着mid由mid自己得到,但是可以直接通过头指针和尾指针得到,统一了逻辑就不会有问题
+# 写的逻辑还是有点蠢
+class Solution:
+    def searchRange(self, nums, target: int):
+        n = len(nums)
+        first = 0
+        last = n - 1
+        flag = False
+        while first <= last:
+            mid = (last + first) // 2
+            if nums[mid] > target:
+                last = mid - 1
+            elif nums[mid] < target:
+                first = mid + 1
+            else:
+                flag = True
+                start = end = mid
+                # 此处的逻辑写的还是太蠢了, 好好看看上面那个方法的逻辑
+                l = 1
+                r = 1
+                while l <= mid:
+                    if nums[mid - l] == target:
+                        start -= 1
+                    l += 1
+                while r <= n - 1 - mid:
+
+                    if nums[mid + r] == target:
+                        end += 1
+                    r += 1
+                break
+        if flag:
+            return [start, end]
+        else:
+            return [-1, -1]
 
 
-
-a=Solution().searchRange([],0)
+a = Solution().searchRange([1, 1, 2, 3, 3,4,4, 5, 5, 6, 6], 4)
 print(a)

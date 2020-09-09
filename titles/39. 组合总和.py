@@ -53,5 +53,27 @@ class Solution:
 #
 #         func(candidates, target, [])
 #         return res
-a=Solution().combinationSum([8,7,4,3],11)
+
+# 此题有个条件需要注意, 就是数组中的数字都是正数
+# 二刷, 和上面思路一样,不过貌似我的简洁一点
+class Solution:
+    def combinationSum(self, candidates, target: int):
+        self.res = []
+        def dfs(path, begin, n):
+            path.append(candidates[begin])
+            cur = n - candidates[begin]
+            if cur == 0:
+                self.res.append(path)
+            elif cur>0:
+                for index, i in enumerate(candidates):
+                    # 此处有=,就是元素可以无限取,没有=就是不可重复取
+                    if index>=begin:
+                        dfs(path[:], index, cur)
+            else:
+                return
+
+        for index, i in enumerate(candidates):
+            dfs([], index, target)
+        return self.res
+a=Solution().combinationSum([2,3,5],2)
 print(a)
