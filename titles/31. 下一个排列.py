@@ -73,7 +73,11 @@ class Solution:
                 return
         nums.sort()
 
-
+# 二刷失败,
+# 之后刷的时候参考一下这个思路
+# 从右往左扫描到第一个降序了的数字A,再以这个数字为起点往右再扫描到最后一个比她大的数字B
+# 交换AB, 再给B右边的所有数字升序排列
+# https://leetcode-cn.com/problems/next-permutation/solution/xia-yi-ge-pai-lie-by-leetcode/
 # Solution().nextPermutation([1,2,3])
 for i in range(7,0,-1):
     print(i)
