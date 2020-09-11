@@ -71,6 +71,61 @@ class Solution:
 #                     dp[j]=True
 #         return dp[-1]
 
+# 二刷, 这个会超时
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        self.res = False
+        def dfs(word, s):
+            len_w = len(word)
+            if word == s[:len_w]:
+                if len_w == len(s):
+                    self.res = True
+                for w in wordDict:
+                    dfs(w, s[len_w:])
 
-a=Solution().wordBreak(s = "leetcode", wordDict = ["leet","code"])
+
+        for i in wordDict:
+            dfs(i,s)
+        return self.res
+# 二刷,思路同上,做个优化,优化失败, 方向错了,主要是在于有大量重复计算比如s='aaaaaaaaaaabb',wordDict=['a','aa','aaaaab']而不是startwith或者len耗时
+# 需要有一个缓存数组存着之前走过的结果
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        self.res = False
+        self.mem = {}
+        def dfs(curpath, word, s,index):
+            curpath = curpath + word
+
+            if s == curpath:
+                self.res=True
+                return
+            if s[index:] in self.mem or s[index:].startswith(word):
+                self.mem[s[index:]] = 1
+                for w in wordDict:
+                    dfs(curpath, w, s,len(curpath))
+
+
+        for i in wordDict:
+            dfs('',i,s,0)
+        return self.res
+
+# 这是缓存节点的优化方式
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        memory = {}
+        def dfs(s1):
+            if s1 in memory:
+                return memory[s1]
+            for word in wordDict:
+                if s1 == word:
+                    return True
+                if s1.startswith(word):
+                    ans = dfs(s1[len(word):])
+                    memory[s1] = ans
+                    if ans:
+                        return True
+            return False
+        return dfs(s)
+
+a=Solution().wordBreak(s = "aaab", wordDict = ["a","aa","aab"])
 print(a)

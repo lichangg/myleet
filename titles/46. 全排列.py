@@ -21,6 +21,9 @@
 #         return res
 
 #深度递归搜索， path记录的是数据在原数组中的索引，效率同上
+from typing import List
+
+
 class Solution:
     def permute(self, nums):
         res = []
@@ -36,5 +39,25 @@ class Solution:
         for index,i in enumerate(nums):
             dfs(nums,res,[],index)
         return res
+
+# 二刷
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        self.res = []
+        def dfs(path, n, nums):
+            path.append(n)
+            if len(path) == len(nums):
+                self.res.append(path)
+                return
+            for i in nums:
+                if i not in path:
+                    dfs(path[:], i, nums)
+
+
+        for i in nums:
+            dfs([], i, nums)
+        return self.res
+
+
 a=Solution().permute([1,2,4])
 print(a)
