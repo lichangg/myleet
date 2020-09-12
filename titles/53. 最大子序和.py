@@ -17,5 +17,25 @@ class Solution:
 
         return max_sum
 
+# 二刷，比之前简洁许多了
+class Solution:
+    def maxSubArray(self, nums) -> int:
+        max_sum = float('-inf')
+        i=0
+        si=0
+        while i< len(nums):
+            if si <0:
+                si=0
+
+            si+=nums[i]
+            max_sum = max(max_sum,si)
+            i+=1
+        return max_sum
+
+
+
+
+
+
 a=Solution().maxSubArray([-3,4,-1,2,1,-5,4])
 print(a)

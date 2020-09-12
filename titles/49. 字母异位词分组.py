@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
+from typing import List
+
+
 class Solution:
     def groupAnagrams(self, strs):
         hashmap = {}
@@ -23,6 +26,20 @@ class Solution:
 #             key = tuple(sorted(item))
 #             dict[key] = dict.get(key, []) + [item]
 #         return list(dict.values())
+
+# 二刷
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        self.mem={}
+        for i in strs:
+            s_i=''.join(sorted(i))
+            a=self.mem.get(s_i, [])
+            a.append(i)
+            self.mem[s_i] = a
+        res = [v for k,v in self.mem.items()]
+        return res
+
+
 
 a=Solution().groupAnagrams([])
 print(a)

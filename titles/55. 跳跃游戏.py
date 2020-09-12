@@ -15,5 +15,10 @@ class Solution:
                 return False
         return max_i>=i
 
+# 二刷动态规划失败，上面方法极度简单，多看看
+
+
+
+
 a=Solution().canJump([2,3,1,0,0,4])
 print(a)
