@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-from utils.util_funcs import TreeNode
+from typing import List
+
+from utils.util_funcs import TreeNode, create_BTree_By_List
+
 
 # 递归,不够优雅
 class Solution:
@@ -91,3 +94,8 @@ class Solution:
         #     res.append(cur.val)
         # return res[::-1]
 
+# 二刷失败
+
+b=create_BTree_By_List([1])
+a=Solution().inorderTraversal(b)
+print(a)
