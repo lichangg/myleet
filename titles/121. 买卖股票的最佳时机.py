@@ -5,6 +5,9 @@
 # 当遇到比左指针还低的价格时,左指针收缩过来,右指针继续向右找
 # 执行用时：44 ms, 在所有 Python3 提交中击败了89.32%的用户
 # 内存消耗：14.5 MB, 在所有 Python3 提交中击败了76.41%的用户
+from typing import List
+
+
 class Solution:
     def maxProfit(self, prices) -> int:
         l = 0
@@ -32,5 +35,21 @@ class Solution:
 #
 #         return dp[-1]
 
-a=Solution().maxProfit([7,1,5,3,6,4,0,6])
+# 二刷,动态规划
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        if not prices:return 0
+        dp = [0 for _ in range(len(prices))]
+        cur_min = float('inf')
+
+        for index, i in enumerate(prices):
+            if i>cur_min:
+                cur_profit = i - cur_min
+            else:
+                cur_profit = 0
+                cur_min = i
+            dp[index] = max(cur_profit,dp[index-1])
+        return dp[-1]
+
+a=Solution().maxProfit([7,1,5,3,6,4])
 print(a)

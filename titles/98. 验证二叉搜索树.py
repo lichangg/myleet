@@ -17,3 +17,20 @@ class Solution:
         middle(root)
         return Solution.FLAG
 
+# 二刷
+class Solution:
+    def isValidBST(self, root) -> bool:
+        self.min = float('-inf')
+        self.valid = True
+        def middle(node):
+            if not node:
+                return
+            middle(node.left)
+            if node.val > self.min:
+                self.min = node.val
+            else:
+                self.valid = False
+                return
+            middle(node.right)
+        middle(root)
+        return self.valid

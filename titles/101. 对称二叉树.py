@@ -26,6 +26,33 @@ class Solution:
             stack = temp
 
         return Solution.FLAG
+
+# 二刷,层序遍历
+class Solution:
+
+    def isSymmetric(self, root) -> bool:
+        def is_symmetric(nums):
+            return nums == nums[::-1]
+        stack = [root]
+        while stack:
+            res = []
+            temp = []
+            for i in stack:
+                if i:
+                    res.append(i.val)
+                    temp.append(i.left)
+                    temp.append(i.right)
+                else:res.append(None)
+
+            flag = is_symmetric(res)
+            if not flag:
+                return False
+            stack = temp
+        return True
+
+
+
+
 t=Tree()
 [t.add(i)for i in [1,2,2,None,3,None,3]]
 a=Solution().isSymmetric(t.root)

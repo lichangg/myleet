@@ -23,6 +23,25 @@ class Solution:
             dfs(root.right, path[:])
         dfs(root, [])
         return self.res
+
+# 二刷优化一下,就是记录了一下当前和,不用每次都sum了,不过反倒慢了,看不懂
+class Solution:
+    def pathSum(self, root: TreeNode, s: int) -> List[List[int]]:
+        self.res = []
+        if not root:
+            return []
+        def dfs(root, path, cur_sum):
+            if not root:
+                return
+
+            path.append(root.val)
+            cur_sum+=root.val
+            if cur_sum == s and not root.left and not root.right:
+                self.res.append(path)
+            dfs(root.left, path[:], cur_sum)
+            dfs(root.right, path[:], cur_sum)
+        dfs(root, [], 0)
+        return self.res
 b=Tree()
 [b.add(i)for i in [0,1]]
 

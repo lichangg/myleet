@@ -7,6 +7,7 @@ from utils.util_funcs import TreeNode, Tree
 # 先序[3,9,1,8,20,15,7]
 # 中序[1,9,8,3,15,20,7]
 # 也就是对于root 3 来说,通过中序遍历可以确定了它的左子树有多少个元素,然后再去先序遍历中往后推移这么多个元素就得到了左子树的先序遍历结果
+# 不断的确定左右子树的先序和中序,递归地建立树
 class Solution:
     def buildTree(self, preorder, inorder) -> TreeNode:
         # preorder和inorder一定同时为空

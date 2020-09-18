@@ -27,6 +27,26 @@ class Solution:
 
         return res
 
+# 二刷,层序遍历
+class Solution:
+
+    def levelOrder(self, root) -> bool:
+        res = []
+        stack = [root]
+        while stack:
+            val_res = []
+            temp = []
+            for i in stack:
+                if i:
+                    val_res.append(i.val)
+                    temp.append(i.left)
+                    temp.append(i.right)
+
+            stack = temp
+            if val_res:
+                res.append(val_res)
+        return res
+
 t=Tree()
 [t.add(i)for i in [3,9,20,None,None,15,7]]
 a=Solution().levelOrder(t.root)

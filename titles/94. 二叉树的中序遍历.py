@@ -96,6 +96,8 @@ class Solution:
 
 # 二刷失败
 
+# 三刷失败, 我吐了
+
 b=create_BTree_By_List([1])
 a=Solution().inorderTraversal(b)
 print(a)

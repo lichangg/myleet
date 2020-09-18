@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-from utils.util_funcs import TreeNode
+from utils.util_funcs import TreeNode,create_BTree_By_List
 # 学到了
 # 从根节点开始的操作
 # 1.如果没有左节点
@@ -32,3 +32,25 @@ class Solution:
             root.right = root.left
             root.left = None
             self.flatten(root.right)
+
+
+class Solution:
+    def flatten(self, root: TreeNode) -> None:
+        cur = root
+        while cur:
+            r = cur.right
+            l = cur.left
+            if l:
+                l_node = l
+                while l_node and (l_node.right or l_node.left):
+                    l_node = l_node.right or l_node.left
+
+                l_node.right = r
+                cur.right = l
+            # 要注意左边要置为None. 不然翻车了
+            cur.left=None
+            cur = cur.right
+
+b=create_BTree_By_List([])
+Solution().flatten(b)
+b.preorder()

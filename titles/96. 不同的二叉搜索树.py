@@ -22,6 +22,6 @@ class Solution:
             nums.append(count)
         return nums[-1]
 
-
+# 二刷失败
 a=Solution().numTrees(3)
 print(a)
