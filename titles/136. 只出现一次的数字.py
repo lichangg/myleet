@@ -14,3 +14,13 @@ class Solution:
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
         return sum(set(nums)) * 2 - sum(nums)
+# 二刷
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        i= 0
+        a=0
+        while i<len(nums):
+            a= nums[i]^a
+        return a
+a=Solution().singleNumber([4,4,2])
+print(a)

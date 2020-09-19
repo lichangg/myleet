@@ -19,6 +19,6 @@ class Solution:
             res = max(res, curLen)
         return res
 
-
+# 二刷失败， 好好看看上面的解法，非常精妙
 a=Solution().longestConsecutive([100, 4, 200, 1, 3, 2])
 print(a)
