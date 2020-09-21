@@ -85,26 +85,30 @@ class LRUCache:
 
 
 # Python [collections]模块提供的OrderedDict完美适配LRUCache，既有序又能将指定键值对移至末尾。代码如下：
-# from collections import OrderedDict
-# class LRUCache:
-#
-#     def __init__(self, capacity: int):
-#         self.capacity = capacity
-#         self.d = OrderedDict()
-#
-#     def get(self, key: int) -> int:
-#         v = self.d.get(key, -1)
-#         if key in self.d:
-#             self.d.move_to_end(key, last=True)
-#         return v
-#
-#     def put(self, key: int, value: int) -> None:
-#         self.d[key] = value
-#         self.d.move_to_end(key, last=True)
-#         if len(self.d) > self.capacity:
-#             self.d.popitem(last=False)
-#         print(self.d)
+from collections import OrderedDict
+class LRUCache:
 
+    def __init__(self, capacity: int):
+        self.capacity = capacity
+        self.d = OrderedDict()
+
+    def get(self, key: int) -> int:
+        v = self.d.get(key, -1)
+        if key in self.d:
+            self.d.move_to_end(key, last=True)
+        return v
+
+    def put(self, key: int, value: int) -> None:
+        self.d[key] = value
+        self.d.move_to_end(key, last=True)
+        if len(self.d) > self.capacity:
+            self.d.popitem(last=False)
+        print(self.d)
+
+
+# 二刷总结
+# 思路就是用一个字典保存键值对, 再用一个队列保存键的顺序, 如果用一个普通队列的话拿插入删除都是O(N), 可以用双向队列代替,这样插入删除都是O(1)
+# 另外注意的是OrderedDict可以完美实现
 
 cache=LRUCache(2)
 cache.put(1, 1)

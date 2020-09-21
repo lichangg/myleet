@@ -32,5 +32,16 @@ class Solution:
         print(reverse_nums)
         return max(nums + reverse_nums)
 
+# 二刷思路, 以0为切割
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+        abs_stack = []
+        max_prod = 1
+        for i in nums:
+            if i>0:
+                max_prod*=i
+            else:
+                if abs_stack:
+                    abs_stack[0] = append(max_prod*abs(i))
 a=Solution().maxProduct([-10,1,2,3,1,2,3,6])
 print(a)

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 from typing import List
-# 学到了,这个想法太精妙了
+# 学到了
 #题目要求复杂度是O(n),下面这个方法有for还有while为什么也符合O(n)呢?
 #解释: 如果有 x-1那么就不用做了,直接下一位,无论排序如何, 例如 [1,2,3] 只会做1的while 2,3的while都不会做, 再比如[2,1,3] 仍然也只做1的while而不会做2,3的while
 class Solution:
@@ -19,7 +19,6 @@ class Solution:
             res = max(res, curLen)
         return res
 
-# 二刷失败
-
+# 二刷失败， 好好看看上面的解法，非常精妙
 a=Solution().longestConsecutive([100, 4, 200, 1, 3, 2])
 print(a)

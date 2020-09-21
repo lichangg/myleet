@@ -35,4 +35,17 @@ class Solution:
             p = p.left
         return root
 
+# 二刷
+class Solution:
+    def convertBST(self, root: TreeNode) -> TreeNode:
+        self.cur_sum = 0
+        def dfs(node):
+            if not node:
+                return
+            dfs(node.right)
+            self.cur_sum+=node.val
+            node.val = self.cur_sum
+            dfs(node.left)
+        dfs(root)
+        return root
 
