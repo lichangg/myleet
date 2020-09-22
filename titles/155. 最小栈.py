@@ -41,7 +41,7 @@
 #         return self.min[0]
 import math
 
-
+# min_stack有点计数的一i是
 class MinStack:
     def __init__(self):
         self.stack = []

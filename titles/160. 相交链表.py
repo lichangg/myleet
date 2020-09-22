@@ -40,7 +40,14 @@ class Solution:
 
         return None
 
-# 别人写的, 也太优雅了, 学到了
+# 别人写的, 也太优雅了, 学到了,
+# 思路就是A指针和B指针分别从headA和headB头节点出发, 哪个指针走完之后换到另一个头节点继续走,也就是:
+# A走了len(headA) + len(headB)
+# B走了len(headB) + len(headA)
+# 两者长度肯定是一样长的
+# 情况1: headA和headB不相交, 那么结束于None=None位置, 返回None
+# 情况2: headA和headB相交, 那肯定结束于交点位置,返回交点
+# 土味理解: 假如headA是长链表,headB是短链表, 指针A,B同时分别从headA和headB出发, 由于任意时间点AB走过的路程都一样, AB必定会在走完各自最先走的节点然后换节点走的时候相遇在交点(因为速度一样,路程一样, 肯定会同时到达交点)
 class Solution(object):
     def getIntersectionNode(self, headA, headB):
         ha, hb = headA, headB
@@ -48,3 +55,22 @@ class Solution(object):
             ha = ha.next if ha else headB
             hb = hb.next if hb else headA
         return ha
+
+# 二刷, 需要注意一些小细节,不过这个方法用了额外的空间
+class Solution(object):
+    def getIntersectionNode(self, headA, headB):
+        sa=set()
+        sb=set()
+        while 1:
+            if headA in sb:
+                return headA
+            sa.add(headA)
+            if headB in sa:
+                return headB
+            sb.add(headB)
+            if headA:
+                headA = headA.next
+            if headB:
+                headB = headB.next
+            if not headA and not headB:
+                return

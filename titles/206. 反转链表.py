@@ -38,6 +38,19 @@ class Solution:
         c=recur(head,None)
         return c
 
+# 二刷, 看了答案才写出来, 算失败了
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        cur = head
+        pre = None
+        while cur:
+            temp = cur.next
+            cur.next = pre
+
+            pre = cur
+            cur = temp
+        return pre
+
 b=gen_list([])
 a=Solution().reverseList(b)
 enum_node(a)

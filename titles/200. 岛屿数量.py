@@ -2,6 +2,8 @@
 # -*- coding:utf-8 -*-
 import collections
 from typing import List
+
+
 # 连通型问题都可以用DFS或BFS扩张来解决
 
 # DFS
@@ -14,9 +16,10 @@ class Solution:
         y = len(grid[0]) - 1
         if x == 0 and y == 0:
             return 1 if grid[0][0] == '1' else 0
+
         def dps(m, n):
             # 直接判断边界外的还有0的情况返回
-            if m == -1 or n == -1 or m>x or n >y or grid[m][n] =='0':return
+            if m == -1 or n == -1 or m > x or n > y or grid[m][n] == '0': return
             grid[m][n] = '0'
             prob_coordinate = [(m + 1, n), (m - 1, n), (m, n + 1), (m, n - 1)]
             for co in prob_coordinate:
@@ -27,8 +30,10 @@ class Solution:
             for j in range(y + 1):
                 if grid[i][j] == '1':
                     dps(i, j)
-                    count+=1
+                    count += 1
         return count
+
+
 # BFS(这是BFS么?有点怀疑)
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
@@ -51,12 +56,46 @@ class Solution:
                                 land_positions.append([new_x, new_y])
         return count
 
+# 二刷, 不过有些奇怪的是记录下经过的坐标集合竟然不会加快运行速度
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        self.m = len(grid[0])
+        self.n = len(grid)
+        # 经过的坐标集合
+        self.cordinate_set = set()
+        count = 0
 
-b = [["1","1","0","0","0"]
-    ,["1","1","0","0","0"]
-    ,["0","0","1","0","0"]
-    ,["0","0","0","1","1"]
+        def dfs(y, x):
+            if (y,x) in self.cordinate_set:
+                return
+            self.cordinate_set.add((y,x))
+            if y >= self.n or y < 0 or x < 0 or x >= self.m:
+                return
+            if grid[y][x] == '1':
+                grid[y][x] = '0'
+            else:
+                return
+            dfs(y + 1, x)
+            dfs(y - 1, x)
+            dfs(y, x + 1)
+            dfs(y, x - 1)
+
+        i, j = 0, 0
+        while i < self.n:
+            j=0
+            while j < self.m:
+                if grid[i][j] == '1':
+                    dfs(i, j)
+                    count += 1
+                j += 1
+            i += 1
+
+        return count
+b = [
+    ["1","0","1","1","0","1","1"]
      ]
+
+
 
 a = Solution().numIslands(b)
 print(a)
