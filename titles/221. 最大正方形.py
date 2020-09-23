@@ -2,6 +2,8 @@
 # -*- coding:utf-8 -*-
 import itertools
 from typing import List
+
+
 # 和85，84题一脉相承，就是速度好像太慢了
 # 执行用时：400 ms, 在所有 Python3 提交中击败了5.05%的用户
 # 内存消耗：14.3 MB, 在所有 Python3 提交中击败了74.00%的用户
@@ -50,6 +52,7 @@ class Solution:
     #         res = max(res, min(i) * min(i))
     #     return res
 
+
 # 暴力法是最简单直观的做法，具体做法如下：
 # 1. 遍历矩阵中的每个元素，每次遇到 1，则将该元素作为正方形的左上角；
 # 2. 确定正方形的左上角后，根据左上角所在的行和列计算可能的最大正方形的边长（正方形的范围不能超出矩阵的行数和列数），在该边长范围内寻找只包含 11 的最大正方形；
@@ -86,7 +89,8 @@ class Solution:
         maxSquare = maxSide * maxSide
         return maxSquare
 
-#动态规划，遍历每一个位置，如果为1，得到它的最大边长，最大边长就是最大正方形
+
+# 动态规划，遍历每一个位置，如果为1，得到它的最大边长，最大边长就是最大正方形
 class Solution:
     def maximalSquare(self, matrix: List[List[str]]) -> int:
         if len(matrix) == 0 or len(matrix[0]) == 0:
@@ -108,9 +112,49 @@ class Solution:
         return maxSquare
 
 
+class Solution:
+    def maximalSquare(self, matrix: List[List[str]]) -> int:
+        n = len(matrix)
+        m = len(matrix[0])
+        self.max_area = 0
+
+        def valid(y, x):
+            return matrix[y][x] == '1'
+
+        def dfs(side, need_valid, imax, jmax):
+
+            self.max_area = max(self.max_area, side ** 2)
+            if imax+1 > n or jmax+1 > m:
+                return
+            if all([valid(*i) for i in need_valid]):
+                next_valid = []
+                for cor in need_valid:
+                    matrix[cor[0]][cor[1]] = '0'
+                    if cor[0] == imax and cor[1] == jmax:
+                        need_valid.append((imax + 1, jmax + 1))
+                        need_valid.append((imax, jmax + 1))
+                        need_valid.append((imax + 1, jmax))
+                        continue
+                    if cor[0] == imax:
+                        need_valid.append((cor[0] + 1, cor[1]))
+                        continue
+                    if cor[1] == jmax:
+                        need_valid.append((cor[0], cor[1] + 1))
+                        continue
+                dfs(side + 1, next_valid, imax + 1, jmax + 1)
+            else:
+                return
+
+        for i in range(n):
+            for j in range(m):
+                if matrix[i][j] == '1':
+                    need_valid = [(i + 1, j), (i, j + 1), (i + 1, j + 1)]
+                    dfs(1, need_valid, i + 1, j + 1)
+
+        return self.max_area
 a = Solution().maximalSquare(
-[["1","0","1","0"],
- ["1","0","1","1"],
- ["1","0","1","1"],
- ["1","1","1","1"]])
+    [["1", "0", "1", "0"],
+     ["1", "0", "1", "1"],
+     ["1", "0", "1", "1"],
+     ["1", "1", "1", "1"]])
 print(a)
