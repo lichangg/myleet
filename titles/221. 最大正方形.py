@@ -102,20 +102,32 @@ class Solution:
         for i in range(rows):
             for j in range(columns):
                 if matrix[i][j] == '1':
+                    # 这个是在初始化
                     if i == 0 or j == 0:
                         dp[i][j] = 1
                     else:
+                        # 这个逻辑很精髓啊, 每一个最右下角的点的dp值(也就是正方形的边长)都由和它关联的 上\下\左上 这三个点当中的最小值+1组成
                         dp[i][j] = min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]) + 1
                     maxSide = max(maxSide, dp[i][j])
 
         maxSquare = maxSide * maxSide
         return maxSquare
 
-
+# 二刷, 思路没问题, 联通问题可以通过更改其原本的值来防止重复走, 但是需要注意,如果单纯把符合要求的1改成不合要求的0会有问题
+# 例如[["0","0","0","1"],
+    # ["1","1","0","1"],
+    # ["1","1","1","1"],
+    # ["0","1","1","1"],
+    # ["0","1","1","1"]]
+    #在执行matrix[1][0] 的时候会把[2][1]改为0, 会导致在执行到matrix[2][1]的时候,它不合要求了, 所以下面的算法实际上改成了2(其实也没必要改了, 已修改,和重复走是一样的复杂度了)
+# 执行用时：600 ms, 在所有 Python3 提交中击败了5.05%的用户
+# 内存消耗：14.3 MB, 在所有 Python3 提交中击败了6.35%的用户
 class Solution:
     def maximalSquare(self, matrix: List[List[str]]) -> int:
-        n = len(matrix)
-        m = len(matrix[0])
+        if not matrix:
+            return 0
+        n = len(matrix)#4
+        m = len(matrix[0])#4
         self.max_area = 0
 
         def valid(y, x):
@@ -124,22 +136,21 @@ class Solution:
         def dfs(side, need_valid, imax, jmax):
 
             self.max_area = max(self.max_area, side ** 2)
-            if imax+1 > n or jmax+1 > m:
+            if imax >= n or jmax >= m:
                 return
             if all([valid(*i) for i in need_valid]):
                 next_valid = []
                 for cor in need_valid:
-                    matrix[cor[0]][cor[1]] = '0'
                     if cor[0] == imax and cor[1] == jmax:
-                        need_valid.append((imax + 1, jmax + 1))
-                        need_valid.append((imax, jmax + 1))
-                        need_valid.append((imax + 1, jmax))
+                        next_valid.append((imax + 1, jmax + 1))
+                        next_valid.append((imax, jmax + 1))
+                        next_valid.append((imax + 1, jmax))
                         continue
                     if cor[0] == imax:
-                        need_valid.append((cor[0] + 1, cor[1]))
+                        next_valid.append((cor[0] + 1, cor[1]))
                         continue
                     if cor[1] == jmax:
-                        need_valid.append((cor[0], cor[1] + 1))
+                        next_valid.append((cor[0], cor[1] + 1))
                         continue
                 dfs(side + 1, next_valid, imax + 1, jmax + 1)
             else:
@@ -153,8 +164,12 @@ class Solution:
 
         return self.max_area
 a = Solution().maximalSquare(
-    [["1", "0", "1", "0"],
-     ["1", "0", "1", "1"],
-     ["1", "0", "1", "1"],
-     ["1", "1", "1", "1"]])
+    [["1", "1", "1", "0", "0"],
+     ["1", "1", "1", "0", "0"],
+     ["1", "1", "1", "1", "1"],
+     ["0", "1", "1", "1", "1"],
+     ["0", "1", "1", "1", "1"],
+     ["0", "1", "1", "1", "1"]
+     ]
+)
 print(a)

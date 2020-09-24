@@ -15,3 +15,21 @@ class Solution:
         if not left: return right
         return root
 
+# 二刷, 我吐了,太不优雅了
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        self.stack=[]
+        self.node = root
+        def dfs(node):
+            if not node:return None
+            l_res = dfs(node.left)
+            r_res = dfs(node.right)
+            if ((l_res or r_res) and (node.val == p.val or node.val == q.val)) or (l_res and r_res):
+                self.node = node
+                return
+            if node.val == p.val or node.val == q.val:
+                return True
+            return l_res or r_res
+        dfs(root)
+        return self.node
+

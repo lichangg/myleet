@@ -58,7 +58,32 @@ class Solution:
             pre = pre.next
         return not pre
 
-b=gen_list([1,0,0])
+# 二刷
+class Solution:
+    def isPalindrome(self, head: ListNode) -> bool:
+        fast = slow = head
+        pre = None
+        while fast and fast.next:
+            # 由于传递的是引用,所以这行代码放在slow=temp之后会有问题. 假如放在其后,由于fast.next和slow.next是同一个节点,所以在执行到
+            # slow.next=pre的时候会把fast.next直接改掉,从而导致fast.next.next是不对的东西
+            fast = fast.next.next
+
+            temp = slow.next
+            slow.next = pre
+            pre = slow
+            slow = temp
+
+        if fast:
+            slow = slow.next
+        while pre:
+            if pre.val == slow.val:
+                pre = pre.next
+                slow = slow.next
+            else:
+                return False
+        return True
+
+b=gen_list([1,2])
 a=Solution().isPalindrome(b)
 print(a)
 
