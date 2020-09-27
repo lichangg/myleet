@@ -48,6 +48,7 @@ class Solution:
             output.append(nums[deq[0]])
         return output
 
+# 二刷时有点看懂了, 非常精髓
 # 方法4: 动态规划,暂时没看懂
 # 思路: 滑动窗口长度为k, 可以先假想滑动窗口每次滑动的距离也为k(此为方式1), 此时求输出滑动窗口最大值列表就很简单, 每隔k隔元素遍历窗口求最大值就行,此时最大值的个数为n/k (若余数不为0则向上取整)
 # 目前窗口之间的信息是不互通的
@@ -55,7 +56,7 @@ class Solution:
 # 要达到这个效果可以生成两个统计数组left和right,
 # left统计方式1中每个窗口从左向右的最大值
 # right统计方式1中每个窗口从右向左的最大值
-# 这样两个数组可以获得最全的信息
+# 这样两个数组可以获得最全的最大值信息
 class Solution:
     def maxSlidingWindow(self, nums: 'List[int]', k: 'int') -> 'List[int]':
         n = len(nums)
@@ -89,5 +90,57 @@ class Solution:
 
         return output
 
-a=Solution().maxSlidingWindow([1,3,-1,-3,5,3,6,7],3)
+
+# 二刷, 先暴力, 很明显会超时
+import heapq
+
+
+class Solution:
+    def maxSlidingWindow(self, nums: 'List[int]', k: 'int') -> 'List[int]':
+        if len(nums) <= k:
+            return [max(nums)]
+        i = k
+        res = []
+        while i <= len(nums):
+            # 注意
+            res.append(max(nums[i - k:i]))
+            # 注意, 下行代码的效率没比上面的高
+            # res.append(heapq.nlargest(1, nums[i - k:i])[0])
+            i += 1
+        return res
+
+# 二刷, 看题解后尝试用双端队列维护最大值窗口
+class Solution:
+    def maxSlidingWindow(self, nums: 'List[int]', k: 'int') -> 'List[int]':
+        n = len(nums)
+        if n * k == 0:
+            return []
+        if k == 1:
+            return nums
+
+        def clean_deque(index):
+            if self.deq and index - self.deq[0] >= k:
+                self.deq.popleft()
+
+            while self.deq and nums[self.deq[-1]] <= nums[index]:
+                self.deq.pop()
+
+        self.deq = deque()
+        max_idx = 0
+        for i in range(k):
+            clean_deque(i)
+            self.deq.append(i)
+            # compute max in nums[:k]
+            if nums[i] > nums[max_idx]:
+                max_idx = i
+        res = [nums[max_idx]]
+
+
+        for i in range(k, len(nums)):
+            clean_deque(i)
+            self.deq.append(i)
+            res.append(nums[self.deq[0]])
+        return res
+
+a = Solution().maxSlidingWindow([1, 3, -1, -3, 5, 3, 6, 7], 3)
 print(a)

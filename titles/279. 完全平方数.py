@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 import math
-
+# 重要
 
 # 思路: dp_nums的索引代表要求的数,其值为和为该数的平方数的最小个数
 # 执行用时：6180 ms, 在所有 Python3 提交中击败了12.48%的用户
@@ -54,7 +54,7 @@ class Solution:
                 return count
 
 
-# 贪心 + BFS（广度优先搜索）
+# BFS（广度优先搜索）(比上述贪心算法慢一点)
 # 这个就是由目标数(也即是根)遍历减去square_nums里面的数,得到第一层各子节点, 各子节点再遍历减去square_nums里面的数,直到得到某个子节点的值也在square_nums里面,该子节点所在的层数就是最小组合数了
 class Solution:
     def numSquares(self, n):
@@ -81,5 +81,28 @@ class Solution:
             queue = next_queue
         return level
 
-a = Solution().numSquares(13)
+# 二刷,动态规划,遇到7691这种数字大的直接超时
+class Solution:
+    def numSquares(self, n):
+        n+=1
+        square_nums = [i * i for i in range(1, int(n ** 0.5) + 1)]
+        dp = [0] * n
+        dp[0] =1
+        for i in range(1, n):
+            if i in square_nums:
+                dp[i] = 1
+            else:
+                candi = []
+                j = 1
+                while 1:
+                    candi.append(dp[j] + dp[i-j])
+                    j+=1
+                    if j>(i//2):
+                        break
+                dp[i] = min(candi)
+
+        return dp[-1]
+
+
+a = Solution().numSquares(12)
 print(a)

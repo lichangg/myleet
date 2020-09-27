@@ -7,6 +7,7 @@
 # 选左下角，往右走增大，往上走减小，可选
 # 选右上角，往下走增大，往左走减小，可选
 # 例如选左下为起始点, 指针只会往上或往右走复杂度为O(m+n)
+# 假如现在选左下角做起点, 每次会选择走上还是走右.这就相当于是二叉搜索树了
 class Solution:
     def searchMatrix(self, matrix, target):
         # an empty matrix obviously does not contain `target` (make this check

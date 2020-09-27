@@ -41,7 +41,21 @@ class Solution(object):
                 nums[j], nums[i] = nums[i], nums[j]
                 j += 1
 
+# 二刷其实是失败, 看了题解才写出来
+class Solution(object):
+    def moveZeroes(self, nums):
+        j = 0
+        i = 0
+        while i<len(nums):
+            if nums[i] !=0:
+                nums[i],nums[j]=nums[j],nums[i]
+            else:
+                i+=1
+                continue
+            i+=1
+            j+=1
+        print(nums)
+
 
 a = [3, 0, 0, 1, 0, 3, 12]
 Solution().moveZeroes(a)
-print(a)

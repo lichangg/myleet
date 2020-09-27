@@ -8,11 +8,6 @@ from utils.util_funcs import ListNode
 
 hq= []
 test1=[5,9,1,54,3,98,72,96,498,598,4,98]
-test2=[[18,3],[5,2],[7,6],[1,19],0]
-# for i in test2:
-#     heapq.heappush(hq, i)
-a=[4,1]
-b=[3,2]
-print(a<b)
-if None:
-    print(1)
+for i in test1:
+    heapq.heappush(hq, i)
+print(hq[0])

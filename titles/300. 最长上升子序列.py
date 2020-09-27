@@ -30,6 +30,14 @@ class Solution:
             if j == res: res += 1
         return res
 
+# 二刷
+class Solution:
+    def lengthOfLIS(self, nums: [int]) -> int:
+        max_seri_len = 0
+        dp = [1] * len(nums)
 
+        for index, i in enumerate(nums):
+
+        return max_seri_len
 a=Solution().lengthOfLIS()
 print(a)
