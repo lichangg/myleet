@@ -57,7 +57,7 @@ class Solution:
         #     cur = cur.right
         # return res
 
-        # # 后序，相同模板
+        # # 后序，相同模板,不同之处在于res顺序是:根右左, 然后取[::-1]就行了, 学到了
         # while stack or cur:
         #     while cur:
         #         res.append(cur.val)

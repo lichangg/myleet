@@ -23,7 +23,8 @@ class Solution:
         return max(dp)
 
 
-# 动态规划 + 二分查找, 复杂度为O(nlogn),暂时看不懂...
+# 动态规划 + 二分查找, 复杂度为O(nlogn),暂时看不懂...,
+# 二刷时仍然看不懂
 class Solution:
     def lengthOfLIS(self, nums: [int]) -> int:
         tails, res = [0] * len(nums), 0

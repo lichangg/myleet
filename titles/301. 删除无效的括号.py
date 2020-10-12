@@ -72,6 +72,8 @@ class Solution:
                         next_level.add(item[:i]+item[i+1:])
             level = next_level
 
+#二刷失败, 上述算法核心就是BFS, 很好理解, 学到了
+
 a=Solution().removeInvalidParentheses(')))(a)(()())')
 print(a)
 
