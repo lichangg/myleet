@@ -21,10 +21,10 @@ from typing import List
 #         return dp[-1]
 
 # dp数组还可以不是一维的!!!学到了
-# 每个dp位置右三种状态
-# 1. 刚买入股票,
-# 2. 不持股,刚卖出股票,下一个位置无法买入
-# 1. 不持股,之前卖出了股票,处于自由期
+# 每个dp位置有三种状态
+# 0. 刚买入股票,
+# 1. 不持股,刚卖出股票,下一个位置无法买入
+# 2. 不持股,之前卖出了股票,处于自由期
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
         if not prices:
@@ -62,6 +62,15 @@ class Solution:
 #
 #         return max(f1, f2)
 
+
+
+# 二刷失败, 太难想了
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+
 b=[1,2,3,0,2]
 a=Solution().maxProfit(b)
 print(a)
+s="""
+{\"@timestamp\":\"2020-10-13T02:02:24.403Z\",\"@metadata\":{\"beat\":\"\",\"type\":\"doc\",\"version\":\"6.3.0\"},\"fileName\":\"/data/wwwroot/www.ichunt.com/v3/Application/Home/Event/IndexEvent.class.php\",\"dateStr\":\"2020-10-13 10:02:23\",\"offset\":1061861,\"app\":\"www\",\"serverIp\":\"172.18.137.21\",\"ts\":1602554543,\"source\":\"/data/wwwroot/www.ichunt.com/v3/Application/Runtime/LogReport/20201013.log\",\"prospector\":{\"type\":\"log\"},\"host\":{\"name\":\"web-slave2\"},\"lineNo\":385,\"msg\":\"\xe6\x9c\xaa\xe6\x89\xbe\xe5\x88\xb0\xe6\x95\xb0\xe6\x8d\xae\",\"msgCode\":\"000000\",\"method\":\"apiBaseCache\",\"input\":{\"type\":\"log\"},\"beat\":{\"name\":\"web-slave2\",\"hostname\":\"web-slave2\",\"version\":\"6.3.0\"}}"""
+print(s)
