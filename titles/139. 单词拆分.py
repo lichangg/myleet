@@ -5,7 +5,7 @@ from typing import List
 # 自己写的,超时
 # class Solution:
 #     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-#         def dps(wordDict, path):
+#         def maxCoins(wordDict, path):
 #             for j in range(len(wordDict)):
 #                 cur_path = path + wordDict[j]
 #                 if cur_path not in s:
@@ -13,10 +13,10 @@ from typing import List
 #                 elif cur_path == s:
 #                     return True
 #                 else:
-#                     res = dps(wordDict,cur_path[:])
+#                     res = maxCoins(wordDict,cur_path[:])
 #                     if res:
 #                         return res
-#         res = dps(wordDict, '')
+#         res = maxCoins(wordDict, '')
 #         if res:
 #             return True
 #         else:

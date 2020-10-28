@@ -57,5 +57,70 @@ class Solution:
                 dp[x] = min(dp[x], dp[x - coin] + 1)
         return dp[amount] if dp[amount] != float('inf') else -1
 
-a=Solution().coinChange([186,419,83,408],6249)
+
+# 二刷, 先用贪心,贪心始终超时,难受
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        if amount == 0:
+            return 0
+        coins.sort()
+        # lru函数的奇怪之处啊
+        # lru里面传的参数太小了会影响效率, 例如[357,239,73,52],9832 用这个测试用例,传个大数9999999就很快,传小的如55就很慢
+        @functools.lru_cache()
+        def is_valid(count, amount):
+            if amount == 0:
+                return True
+            if count == 0:
+                return False
+            for coin in coins:
+                if is_valid(count-1, amount-coin):
+                    return True
+
+        for i in range(0 ,amount+1):
+            if is_valid(i, amount):
+                return i
+        else:
+            return -1
+
+# 二刷, bfs会超时
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+
+        # coins.sort(reverse=True)
+        level = None
+        def bfs(amounts, level):
+            new_amounts = []
+            for amount in amounts:
+                for coin in coins:
+                    if amount == coin:
+                        return level
+                    new_amounts.append(amount - coin)
+            return bfs(new_amounts, level+1)
+        for coin in coins:
+            if coin == amount:
+                return 1
+            level = bfs([amount], 1)
+        return level or -1
+# dfs思路不对, 因为尽管排序后深度搜索是往最大的路径搜的, 是最快到达负值的, 但是并不一定是最快恰好到达0的
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        coins.sort(reverse=True)
+        def dfs(amount,level):
+            if amount == 0:
+                return level
+            if amount<0:
+                return
+            for coin in coins:
+                l = dfs(amount - coin, level+1)
+                if l:
+                    return l
+        for coin in coins:
+            if coin == amount:
+                return 1
+            l = dfs(amount, 0)
+            if l:
+                return l
+        return -1
+
+a=Solution().coinChange([357,239,73,52],9832)
 print(a)

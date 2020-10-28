@@ -60,19 +60,50 @@ class Solution:
         return store[0][len(nums)-1]
 
 # 动态规划...以后看吧
+# class Solution:
+#     def maxCoins(self, nums: List[int]) -> int:
+#         n = len(nums)
+#         points = [1] + nums + [1]
+#         dp = [[0] * (n + 2) for _ in range(n + 2)]
+#
+#         for i in range(n, -1, -1):
+#             for j in range(i + 1, n + 2):
+#                 for k in range(i + 1, j):
+#                     dp[i][j] = max(dp[i][j], dp[i][k] + dp[k][j] + points[i] * points[k] * points[j])
+#         return dp[0][-1]
+
+
+# class Solution:
+#     dic = {}
+#     def maxCoins(self, nums: List[int]) -> int:
+#         if len(nums) == 1:
+#             return nums[0]
+#         if not nums:
+#             return 0
+#         nums.insert(0 ,1)
+#         nums.append(1)
+#         res = []
+#         for index in range(1, len(nums)-1):
+#             val = self.dic.get(tuple(nums[1:index] + (nums[index+1:-1])), self.maxCoins(nums[1:index] + (nums[index+1:-1]))) + nums[index] * nums[index-1] * nums[index+1]
+#             res.append(val)
+#         m = max(res)
+#         if tuple(nums) not in self.dic:
+#             self.dic[tuple(nums)] = m
+#         return m
+# 二刷, 无脑递归, 效率太低,会超时, 用缓存(例如上面的算法)也不方便,而且并没有提升效率
 class Solution:
     def maxCoins(self, nums: List[int]) -> int:
-        n = len(nums)
-        points = [1] + nums + [1]
-        dp = [[0] * (n + 2) for _ in range(n + 2)]
-
-        for i in range(n, -1, -1):
-            for j in range(i + 1, n + 2):
-                for k in range(i + 1, j):
-                    dp[i][j] = max(dp[i][j], dp[i][k] + dp[k][j] + points[i] * points[k] * points[j])
-        return dp[0][-1]
-
-test = [7,8,3,7,2,4,5]
-b = Solution().maxCoins(test)
+        if len(nums) == 1:
+            return nums[0]
+        if not nums:
+            return 0
+        nums.insert(0 ,1)
+        nums.append(1)
+        res = []
+        for index in range(1, len(nums)-1):
+            val = self.maxCoins(nums[1:index] + (nums[index+1:-1])) + nums[index] * nums[index-1] * nums[index+1]
+            res.append(val)
+        return max(res)
+test =  [7,9,8,0,7,1,3,5,5,2,3]
+a = Solution().maxCoins(test)
 print(a)
-print(b)
