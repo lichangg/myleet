@@ -2,6 +2,7 @@
 # -*- coding:utf-8 -*-
 from utils.util_funcs import TreeNode, Tree
 
+
 # 树的生成不好导致本地和线上不一致
 class Solution:
     def rob(self, root: TreeNode) -> int:
@@ -18,10 +19,12 @@ class Solution:
             need_self = root.val + tuple_l[0] + tuple_r[0]
             self.max_val = max(need_son, need_self, self.max_val)
             return (need_son, need_self)
+
         self.max_val = max(dfs(root))
         return self.max_val
 
-#别人写的很优雅啊
+
+# 别人写的很优雅啊
 class Solution:
     def rob(self, root: TreeNode) -> int:
         def _rob(root):
@@ -38,7 +41,21 @@ class Solution:
         return max(_rob(root))
 
 
+# 二刷,和上面完全一样
+class Solution:
+    def rob(self, root: TreeNode) -> int:
+        def max_val(node):
+            if not node: return 0, 0
+            l = max_val(node.left)
+            r = max_val(node.right)
+            noneed_cur_val = max(l) + max(r)
+            need_cur_val = l[0] + r[0] + node.val
+            return noneed_cur_val, need_cur_val
+
+        return max(max_val(root))
+
+
 b = Tree()
-[b.add(i) for i in [3,2,3,None,3,None,1]]
-a=Solution().rob(b.root)
+[b.add(i) for i in [3, 2, 3, None, 3, None, 1]]
+a = Solution().rob(b.root)
 print(a)

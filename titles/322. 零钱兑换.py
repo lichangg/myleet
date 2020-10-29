@@ -102,25 +102,25 @@ class Solution:
             level = bfs([amount], 1)
         return level or -1
 # dfs思路不对, 因为尽管排序后深度搜索是往最大的路径搜的, 是最快到达负值的, 但是并不一定是最快恰好到达0的
-class Solution:
-    def coinChange(self, coins: List[int], amount: int) -> int:
-        coins.sort(reverse=True)
-        def dfs(amount,level):
-            if amount == 0:
-                return level
-            if amount<0:
-                return
-            for coin in coins:
-                l = dfs(amount - coin, level+1)
-                if l:
-                    return l
-        for coin in coins:
-            if coin == amount:
-                return 1
-            l = dfs(amount, 0)
-            if l:
-                return l
-        return -1
+# class Solution:
+#     def coinChange(self, coins: List[int], amount: int) -> int:
+#         coins.sort(reverse=True)
+#         def dfs(amount,level):
+#             if amount == 0:
+#                 return level
+#             if amount<0:
+#                 return
+#             for coin in coins:
+#                 l = dfs(amount - coin, level+1)
+#                 if l:
+#                     return l
+#         for coin in coins:
+#             if coin == amount:
+#                 return 1
+#             l = dfs(amount, 0)
+#             if l:
+#                 return l
+#         return -1
 
 a=Solution().coinChange([357,239,73,52],9832)
 print(a)

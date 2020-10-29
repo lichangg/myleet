@@ -25,20 +25,20 @@ from typing import List
 # 自己实现的hashmap保存次数,比count快得多..
 # 执行用时：52 ms, 在所有 Python3 提交中击败了68.95%的用户
 # 内存消耗：16.4 MB, 在所有 Python3 提交中击败了92.04%的用户
-# class Solution:
-#     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-#         dit = {}
-#         for i in nums:  # 使用字典的特性（相同元素后面值的会覆盖前面的值）统计元素的频率，时间复杂度为O(N)
-#             if i not in dit:  # 如果不存在，则将其存入字典中，此时该值的出现频率为1
-#                 dit[i] = 1
-#             else:  # 如果已经存在，则其出现频率加1
-#                 dit[i] = dit[i] + 1
-#
-#         sort_hasmp = sorted(dit, key=lambda x: dit[x], reverse=True)
-#         res = []
-#         for i in sort_hasmp[:k]:
-#             res.append(i)
-#         return res
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        dit = {}
+        for i in nums:  # 使用字典的特性（相同元素后面值的会覆盖前面的值）统计元素的频率，时间复杂度为O(N)
+            if i not in dit:  # 如果不存在，则将其存入字典中，此时该值的出现频率为1
+                dit[i] = 1
+            else:  # 如果已经存在，则其出现频率加1
+                dit[i] = dit[i] + 1
+
+        sort_hasmp = sorted(dit, key=lambda x: dit[x], reverse=True)
+        res = []
+        for i in sort_hasmp[:k]:
+            res.append(i)
+        return res
 
 # 使用小根堆,python里面的heapq默认是维护最小的在最上面(也就是小根堆),所以频数得取负
 # class Solution:
