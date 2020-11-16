@@ -1,5 +1,17 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-#其只要了解一点：我们一个一个地排队，对于前面已经排好的队，
-# 如果我们在k的位置插入一个新人，那么对k之前的人没有任何影响，对于k之后比新人高的人也没有任何影响，
-# 因此，我们每插入一个人的时候，要么保证前面所有人都比新人高，要么至少保证插入的位置后面的所有人都比新人高。
+#首先要记得一点，高的人不会受低的人影响，所以优先处理高的人，排序完后，按从高到低和优先级处理，先处理高的并且序号小的，序号便是插入的位置
+# 还是有点难想
+from typing import List
+class Solution:
+    def reconstructQueue(self, people: List[List[int]]) -> List[List[int]]:
+        people.sort(key=lambda x: (-x[0], x[1]))
+        res = []
+        for i in people:
+            res.insert(i[1], i)
+        return res
+
+
+a=Solution().reconstructQueue([[7,0], [4,4], [7,1], [5,0], [6,1], [5,2],[8,3]])
+
+print(a)
