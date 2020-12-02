@@ -157,6 +157,31 @@ class Solution:
 # 该题还有很多好的解法, 以后看看
 
 
-a = Solution().trap([5,2,1,2,1,5])
+
+# 始终维护一个单调栈
+class Solution:
+    def trap(self, height: List[int]) -> int:
+        if height == []:
+            return 0
+
+        stack = []
+        ans = 0
+        for i in range(len(height)):
+            # 当进入此条件时, 当前i表示是当前水洼的右边界
+            while len(stack) and height[i] >= height[stack[-1]]:
+                floor = stack.pop()
+                # 此处代表没有左边界了, 自然也就接不了水
+                if len(stack) == 0:
+                    break
+                # 由于栈是单调递减的, 所以当前i(也就是当前右边界)只能和索引为stack[-1]的挡板搭伙并求得一处水洼的面积
+                distance = i - stack[-1] - 1
+                tem_height = min(height[i], height[stack[-1]]) - height[floor]
+                ans += distance * tem_height
+
+            stack.append(i)
+        return ans
+
+
+a = Solution().trap([0,1,0,2,1,0,1,3,2,1,2,1])
 # a = Solution().get_area([3])
 print(a)

@@ -64,5 +64,39 @@ class Solution:
             return [-1, -1]
 
 
-a = Solution().searchRange([1, 1, 2, 3, 3,4,4, 5, 5, 6, 6], 4)
+
+
+# 三刷仍然是被二分法拦住, 我真是吐了
+class Solution:
+    def searchRange(self, nums, target: int):
+
+        def mid_search(nums_c):
+            left = 0
+            right = len(nums_c) -1
+            while left<=right:
+                mid = (left+right)//2
+                if nums_c[mid]<target:
+                    left = mid+1
+                elif nums_c[mid]> target:
+                    right = mid-1
+                else:
+                    return mid
+
+        mid_index = mid_search(nums)
+        if mid_index==None:
+            return [-1,-1]
+        else:
+            start = end = mid_index
+            while start > 0:
+                if nums[start-1] != nums[mid_index]:
+                    break
+                start -=1
+            while end < len(nums)-1:
+                if nums[end+1] != nums[mid_index]:
+                    break
+                end +=1
+
+            return [start, end]
+
+a = Solution().searchRange([1], 1)
 print(a)
