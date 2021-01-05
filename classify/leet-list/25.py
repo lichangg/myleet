@@ -1,8 +1,12 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 from utils.util_funcs import ListNode, gen_list, enum_node
-
-
+# K 个一组翻转链表
+'''
+思路:
+1. 先写出每k个反转一次的方法
+2. 每k个反转之后拼接
+'''
 class Solution:
     def rever(self,head, k):
         i = 0
