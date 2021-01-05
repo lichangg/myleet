@@ -1,5 +1,14 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
+# 堆在物理上是一个数组，在逻辑上是一个二叉树。
+# 大堆：根结点比孩子结点大；
+# 小堆：根结点比孩子结点小；
+# 堆化（向下调整）、向上调整的前提都是：在二叉树中，只有一个位置不满足堆的性质，其它位置都满足堆的性质。
+# 向下调整 是让调整的结点与其孩子节点进行比较
+# 向上调整 是让调整的结点与其父亲结点进行比较
+# 已知双亲的下标，则左孩子的下标为：left=2parent+1；
+# 则右孩子的下标为：left=2parent+2；
+# 已知孩子结点（不区分左右）的下标，则双亲的下标为：（child-1）/2；
 class heapq:
     def __init__(self):
         pass
@@ -89,3 +98,13 @@ class heapq:
             val, nums[0] = nums[0], val
             self.__down_adjust(nums, 0, len(nums))
         return val
+
+if __name__ == "__main__":
+    ex= [8,5,9,4,1,5,7,2,4]
+    h = heapq()
+    h.heapqify(ex)
+    h.heappush(ex, 0)
+    h.heappush(ex, -1)
+    a=h.heappop(ex)
+    print(ex)
+    print(a)
