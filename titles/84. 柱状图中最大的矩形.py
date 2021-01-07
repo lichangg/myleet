@@ -41,18 +41,18 @@ class Solution:
         return res
 
 
-# 单调堆栈,有空看看
-# class Solution:
-#     def largestRectangleArea(self, heights: List[int]) -> int:
-#         stack = [-1]
-#         max_res = 0
-#         for i in range(len(heights)):
-#             while len(stack) > 1 and heights[i] <= heights[stack[-1]]:
-#                 max_res = max(max_res, heights[stack.pop()] * (i - stack[-1] - 1))
-#             stack.append(i)
-#         for i in range(len(stack)-1):
-#             max_res = max(max_res, heights[stack.pop()]*(len(heights)-1-stack[-1]))
-#         return max_res
+# 单调栈,有空看看
+class Solution:
+    def largestRectangleArea(self, heights: List[int]) -> int:
+        stack = [-1]
+        max_res = 0
+        for i in range(len(heights)):
+            while len(stack) > 1 and heights[i] <= heights[stack[-1]]:
+                max_res = max(max_res, heights[stack.pop()] * (i - stack[-1] - 1))
+            stack.append(i)
+        for i in range(len(stack)-1):
+            max_res = max(max_res, heights[stack.pop()]*(len(heights)-1-stack[-1]))
+        return max_res
 
 # 二刷,暴力法, 会超出时间限制
 class Solution:
