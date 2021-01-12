@@ -12,6 +12,6 @@ for i in test1:
     heapq.heappush(hq, i)
 print(hq[4])
 
-# for i in range(len(test1)):
-#     a=heapq.heappop(hq)
-#     print(a)
+for i in range(len(test1)):
+    a=heapq.heappop(hq)
+    print(a)

@@ -66,7 +66,7 @@ class Solution:
         coins.sort()
         # lru函数的奇怪之处啊
         # lru里面传的参数太小了会影响效率, 例如[357,239,73,52],9832 用这个测试用例,传个大数9999999就很快,传小的如55就很慢
-        @functools.lru_cache()
+        @functools.lru_cache(amount)
         def is_valid(count, amount):
             if amount == 0:
                 return True
