@@ -19,6 +19,59 @@ class Solution:
             res = max(res, curLen)
         return res
 
-# 二刷失败， 好好看看上面的解法，非常精妙
-a=Solution().longestConsecutive([100, 4, 200, 1, 3, 2])
+
+
+import collections
+
+
+class DSU:
+    def __init__(self, nums):
+        self.parent = {num: num for num in nums}
+        self.cnt = collections.defaultdict(lambda: 1)
+        # print(self.pre,self.cnt)
+
+    def find(self, x):
+        while x != self.parent[x]:
+            x = self.parent[x]
+        return x
+
+    def find(self, x):
+        while x != self.parent[x]:
+            # 路径压缩
+            self.parent[x] = self.parent[self.parent[x]]
+
+            x = self.parent[x]
+        return x
+
+    def union(self, x, y):
+        if y not in self.parent:
+            return 1
+        # 寻找x, y的根节点，记为root1, root2
+        root1, root2 = self.find(x), self.find(y)
+
+        # 如果root1 == root2，直接返回self.cnt[root1]或者self.cnt[root2]
+        # 表示当前的数与之前已经出现的一些数字能构成连续序列
+        if root1 == root2:
+            return self.cnt[root1]
+
+        # 将root2的根节点改为root1，如下面步骤5中的图所示，将两棵子树合并
+        self.parent[root2] = root1
+        # 如下面步骤5中的图所示，两棵子树合并时，现在的树的元素个数就是这两棵树之和
+        self.cnt[root1] += self.cnt[root2]
+        return self.cnt[root1]
+
+
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        if len(nums) == 0: return 0
+        dsu = DSU(nums)
+        res = 1
+        for num in nums:
+            # print(num)
+            res = max(res, dsu.union(num, num + 1))
+            # print(dsu.pre,dsu.cnt,res)
+        return res
+
+# 二刷失败， 好好看看上面的几个解法，非常精妙
+a=Solution().longestConsecutive([5,6, 1, 2, 3,4])
 print(a)

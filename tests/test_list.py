@@ -11,5 +11,4 @@
 # for i in range(1,1):
 #     print(i)
 
-print([0,0] in [1,2,3,4,0,0])
-print([0,1,1,2,3,4].index(1))
+print(all([1,1,1,0]))
