@@ -23,7 +23,9 @@ class Solution:
 
 import collections
 
-
+# 合并集
+# 1. 初始化N个树节点,此时他们之间无法联通,所以其根节点都是自己
+# 2. 遍历数组开始按规则合并, 合并的时候需要用到查找
 class DSU:
     def __init__(self, nums):
         self.parent = {num: num for num in nums}
