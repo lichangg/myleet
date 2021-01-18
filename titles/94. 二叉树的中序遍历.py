@@ -94,9 +94,52 @@ class Solution:
         #     res.append(cur.val)
         # return res[::-1]
 
-# 二刷失败
+# 三色标记法, 厉害,白色表示未访问过的节点, 灰色表示未访问完全的节点, 黑色表示已完全访问了的节点(不过这里用不到),
+# 用类似递归的写法来写迭代, 更好记忆一些
+class Solution:
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
+        WHITE, GRAY = 0, 1
+        res = []
+        stack = [(WHITE, root)]
+        while stack:
+            color, node = stack.pop()
+            if node is None: continue
+            if color == WHITE:
+                # 中序
+                stack.append((WHITE, node.right))
+                stack.append((GRAY, node))
+                stack.append((WHITE, node.left))
+                # 前序
+                # stack.append((GRAY, node))
+                # stack.append((WHITE, node.right))
+                # stack.append((WHITE, node.left))
+                # 后序
+                # stack.append((WHITE, node.right))
+                # stack.append((GRAY, node))
+                # stack.append((WHITE, node.left))
+            else:
+                res.append(node.val)
+        return res
 
-# 三刷失败, 我吐了
+# 再写一次迭代, 我吐了,写得太不优雅了
+class Solution:
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
+        if not root:return
+        node = root
+        stack = [node]
+        res = []
+        while stack or node:
+            while node:
+                node = node.left
+                if node:
+                    stack.append(node)
+            node = stack.pop()
+            res.append(node.val)
+            node = node.right
+            if node:
+                stack.append(node)
+        return res
+
 
 b=create_BTree_By_List([1])
 a=Solution().inorderTraversal(b)
