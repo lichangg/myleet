@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
+import json
+
+
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
@@ -199,4 +202,44 @@ def create_BTree_By_List(array):
             BTree_list = Create_BTree_One_Step_Up(BTree_list, level_order[i])
 
         return BTree_list[0]
+
+class TreeCreator:
+
+    def serialize(self, root):
+        """Encodes a tree to a single string.
+
+        :type root: TreeNode
+        :rtype: str
+        """
+        # 解法1 层序遍历方式
+        if not root: return ''
+
+        from collections import deque
+        q = deque([root])
+        ans = []
+        while q:
+            node = q.popleft()
+            ans.append(str(node.val) if node else '#')
+            if node: q.extend([node.left, node.right])
+        return ','.join(ans)
+
+    def deserialize(self, data):
+        """Decodes your encoded data to tree.
+
+        :type data: list
+        :rtype: TreeNode
+        """
+        data = json.dumps(data)
+        if not data: return
+
+        nodes = [(TreeNode(int(v)) if v != '#' else None) for v in  data.split(',')]
+        i, j = 0, 1
+        while j < len(nodes):
+            if nodes[i] is not None:
+                nodes[i].left = nodes[j]
+                j += 1
+                nodes[i].right = nodes[j]
+                j += 1
+            i += 1
+        return nodes[0]
 
