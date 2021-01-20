@@ -10,5 +10,6 @@
 # # print(b.index(4))
 # for i in range(1,1):
 #     print(i)
-
-print(all([1,1,1,0]))
+a=[1,0]
+a.insert(-2, 3)
+print(a)
