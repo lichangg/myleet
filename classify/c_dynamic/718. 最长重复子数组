@@ -1,0 +1,49 @@
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+from typing import List
+
+
+# 好像很快,试一下
+class Solution:
+    def findLength(self, A: List[int], B: List[int]) -> int:
+        result = i = 0
+        if A and B:
+            a, b, n = ''.join(map(chr, A)), ''.join(map(chr, B)), min(len(A), len(B))
+            while i + result < n:
+                if a[i:i + result + 1] in b:
+                    result += 1
+                else:
+                    i += 1
+        return result
+
+
+class Solution:
+    def findLength(self, A: List[int], B: List[int]) -> int:
+        lenA = len(A)
+        lenB = len(B)
+        dp = [[0] * lenB for _ in range(lenA)]
+        max_len = 0
+        i = 0
+        while i < lenA:
+            j = 0
+            while j < lenB:
+                if i == 0 or j == 0:
+                    if A[i] == B[j]:
+                        dp[i][j] = 1
+                    else:
+                        dp[i][j] = 0
+                    j += 1
+                    continue
+                if A[i] == B[j]:
+                    dp[i][j] = dp[i - 1][j - 1] + 1
+                    max_len = max(dp[i][j], max_len)
+                else:
+                    dp[i][j] = 0
+                j += 1
+            i += 1
+        return max_len
+
+
+a = Solution().findLength(A=[1, 2, 3, 2, 1],
+                          B=[3, 2, 1, 4, 7])
+print(a)
