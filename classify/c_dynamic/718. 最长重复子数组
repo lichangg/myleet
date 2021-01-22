@@ -2,21 +2,7 @@
 # -*- coding:utf-8 -*-
 from typing import List
 
-
-# 好像很快,试一下
-class Solution:
-    def findLength(self, A: List[int], B: List[int]) -> int:
-        result = i = 0
-        if A and B:
-            a, b, n = ''.join(map(chr, A)), ''.join(map(chr, B)), min(len(A), len(B))
-            while i + result < n:
-                if a[i:i + result + 1] in b:
-                    result += 1
-                else:
-                    i += 1
-        return result
-
-
+# 这题和1143求最长公共子序列(LCS)思路非常像, 都是填二维数组, 只不过dp[i][j]的含义不一样
 class Solution:
     def findLength(self, A: List[int], B: List[int]) -> int:
         lenA = len(A)
@@ -43,7 +29,37 @@ class Solution:
             i += 1
         return max_len
 
+# 好像很快,试一下
+class Solution:
+    def findLength(self, A: List[int], B: List[int]) -> int:
+        result = i = 0
+        if A and B:
+            a, b, n = ''.join(map(chr, A)), ''.join(map(chr, B)), min(len(A), len(B))
+            while i + result < n:
+                #此处由于每次只管看有没有比result长的字段,所以复杂度会降低
+                if a[i:i + result + 1] in b:
+                    result += 1
+                else:
+                    i += 1
+        return result
 
-a = Solution().findLength(A=[1, 2, 3, 2, 1],
-                          B=[3, 2, 1, 4, 7])
+class Solution:
+    def findLength(self, A: List[int], B: List[int]) -> int:
+        A=''.join(map(chr, A))
+        B=''.join(map(chr, B))
+        max_c= 0
+        for idx, i in enumerate(A):
+            # 不能跳过
+            # if idx<end:
+            #     continue
+            end = idx + 1
+            while end < len(A)+1:
+                if A[idx:end] not in B:
+                    break
+                max_c = max(max_c, end - idx)
+                end+=1
+
+        return max_c
+a = Solution().findLength([1,0,1,0,0,0,0,0,1,1],
+[1,1,0,1,1,0,0,0,0,0])
 print(a)
