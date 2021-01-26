@@ -3,32 +3,31 @@
 # dfs直接超时,下面这个用例超时, 超时原因不解释了
 # "bdbaabeeadcbbdedacbbeecbabebaeeecaeabaedadcbdbcdaabebdadbbaeabdadeaabbabbecebbebcaddaacccebeaeedababedeacdeaaaeeaecbe"
 # "bddabdcae"
-class Solution:
-    def numDistinct(self, s: str, t: str) -> int:
-        self.count = 0
-
-        def dfs(idx, char, path):
-            path += char
-            l = len(path)
-            if path != t[:l]:
-                return
-            if path == t:
-                self.count += 1
-                return
-            if path in self.cache:
-
-            for new_idx, new_i in enumerate(s):
-                if new_idx <= idx:
-                    continue
-                else:
-                    dfs(new_idx, new_i, path)
-
-        for idx, i in enumerate(s):
-            dfs(idx, i, '')
-        return self.count
+# class Solution:
+#     def numDistinct(self, s: str, t: str) -> int:
+#         self.count = 0
+#
+#         def dfs(idx, char, path):
+#             path += char
+#             l = len(path)
+#             if path != t[:l]:
+#                 return
+#             if path == t:
+#                 self.count += 1
+#                 return
+#
+#             for new_idx, new_i in enumerate(s):
+#                 if new_idx <= idx:
+#                     continue
+#                 else:
+#                     dfs(new_idx, new_i, path)
+#
+#         for idx, i in enumerate(s):
+#             dfs(idx, i, '')
+#         return self.count
 
 # 动态规划
-# 这里面很难想的就是转移方程:
+# 这里面很难想的就是转移方程, 不咋好想到:
 #    '' r a b b b i t
 # '' 1 1 1 1 1 1 1 1
 # r  0 1 1 1 1 1 1 1
@@ -45,6 +44,24 @@ class Solution:
 # 现在dp[i][j]既然是s要最后一个字符串, 那自然就是[1]和[2]相加
 class Solution:
     def numDistinct(self, s: str, t: str) -> int:
-a = Solution().numDistinct("bdbaabeeadcbbdedacbbeecbabebaeeecaeabaedadcbdbcdaabebdadbbaeabdadeaabbabbecebbebcaddaacccebeaeedababedeacdeaaaeeaecbe"
-,"bddabdcae")
+        s = ' ' + s
+        t = ' ' + t
+        lens = len(s)
+        lent = len(t)
+        dp = [[0] * lens if i != 0 else [1] *lens for i in range(lent)]
+
+        i = 1
+        while i< len(t):
+            j=0
+            while j < len(s):
+                if s[j] == t[i]:
+                    dp[i][j] = dp[i-1][j-1] + dp[i][j-1]
+                else:
+                    dp[i][j] = dp[i][j-1]
+                j+=1
+            i+=1
+        return dp[-1][-1]
+
+
+a = Solution().numDistinct(s = "rabbbit", t = "rabbit")
 print(a)
