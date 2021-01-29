@@ -1,25 +1,24 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-a = [4,0,1,9,-4]
+a = [2,4,3,7]
 
-def quick_sort(nums):
-    l = 0
-    r = len(nums)-1
-    def s(nums, l, r):
-        if l >= r:
-            return
+def quick_sort(nums,start, end):
+    l = start
+    r = end
+    if l >= r:
+        return
+    while l< r:
         while l<r and nums[r] >= nums[l]:
             r-=1
         nums[r], nums[l] = nums[l], nums[r]
         while l<r and nums[l] <= nums[r]:
             l+=1
         nums[r], nums[l] = nums[l], nums[r]
-        s(nums, 0, l-1)
-        s(nums, l+1, r)
+    quick_sort(nums, start, l-1)
+    quick_sort(nums, l+1, end)
 
 
-    s(nums, l, r)
-quick_sort(a)
+quick_sort(a, 0, len(a)-1)
 print(a)
 
 
