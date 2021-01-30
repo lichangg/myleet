@@ -10,8 +10,8 @@ hq= []
 test1=[5,9,1,54,3,98,72,96,498,598,4,98]
 for i in test1:
     heapq.heappush(hq, i)
-print(hq[4])
+print(heapq.heappop(hq))
 
-for i in range(len(test1)):
-    a=heapq.heappop(hq)
-    print(a)
+# for i in range(len(test1)):
+#     a=heapq.heappop(hq)
+#     print(a)
