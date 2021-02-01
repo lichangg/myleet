@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 from typing import List
-# 学到了
+# 学到了,这方法比并查集还好用
 #题目要求复杂度是O(n),下面这个方法有for还有while为什么也符合O(n)呢?
 #解释: 如果有 x-1那么就不用做了,直接下一位,无论排序如何, 例如 [1,2,3] 只会做1的while 2,3的while都不会做, 再比如[2,1,3] 仍然也只做1的while而不会做2,3的while
 class Solution:
@@ -23,7 +23,7 @@ class Solution:
 
 import collections
 
-# 合并集
+# 并查集
 # 1. 初始化N个树节点,此时他们之间无法联通,所以其根节点都是自己
 # 2. 遍历数组开始按规则合并, 合并的时候需要用到查找
 class DSU:
@@ -31,11 +31,11 @@ class DSU:
         self.parent = {num: num for num in nums}
         self.cnt = collections.defaultdict(lambda: 1)
         # print(self.pre,self.cnt)
-
-    def find(self, x):
-        while x != self.parent[x]:
-            x = self.parent[x]
-        return x
+    #不进行路径压缩
+    # def find(self, x):
+    #     while x != self.parent[x]:
+    #         x = self.parent[x]
+    #     return x
 
     def find(self, x):
         while x != self.parent[x]:
