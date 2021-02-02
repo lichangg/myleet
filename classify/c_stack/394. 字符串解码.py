@@ -13,33 +13,34 @@ class Solution:
     def decodeString(self, s: str) -> str:
         str_stack = []
         digit_stack = []
-        c=''
+        c = ''
         n = ''
         for i in s:
             if i.isdigit():
-                n +=i
+                n += i
             elif i == '[':
                 digit_stack.append(int(n))
-                n=''
+                n = ''
                 if c:
                     str_stack.append(c)
-                    c=''
+                    c = ''
                 str_stack.append('[')
             elif i == ']':
                 digi = digit_stack.pop()
                 pre = str_stack.pop()
                 while pre != '[':
-                    c = pre +c
+                    c = pre + c
                     if not str_stack:
                         break
                     pre = str_stack.pop()
-                c = digi*c
+                c = digi * c
                 str_stack.append(c)
-                c=''
+                c = ''
             else:
-                c+=i
+                c += i
 
         return ''.join(str_stack) + c
+
 
 # 思路一优雅的写法
 class Solution:
@@ -47,16 +48,17 @@ class Solution:
         stack, res, multi = [], "", 0
         for c in s:
             if c == '[':
-                stack.append([multi, res]) # 左括号必是数字(题目规定的)
+                stack.append([multi, res])  # 左括号必是数字(题目规定的)
                 res, multi = "", 0
             elif c == ']':
                 cur_multi, last_res = stack.pop()
-                res = last_res + cur_multi * res # 上一个结果和当前结果乘以数字后的结果相加
+                res = last_res + cur_multi * res  # 上一个结果和当前结果乘以数字后的结果相加
             elif '0' <= c <= '9':
-                multi = multi * 10 + int(c)           # 用一个倍数记录数字,妙啊
+                multi = multi * 10 + int(c)  # 用一个倍数记录数字,妙啊
             else:
                 res += c
         return res
+
 
 # 思路二:递归:好像也挺简单的, 把[作为递归开始条件, 把]作为终止递归条件
 class Solution:
@@ -76,7 +78,36 @@ class Solution:
                     res += s[i]
                 i += 1
             return res
-        return dfs(s,0)
 
-a=Solution().decodeString("10[10[abc]]")
+        return dfs(s, 0)
+
+
+# 再刷一遍
+class Solution:
+    def decodeString(self, s: str) -> str:
+        stack = []
+        multi = []
+        res = ''
+        num = 0
+        for i in s:
+            if i == '[':
+                stack.append(res)
+                res = ''
+                multi.append(num)
+                if not num:
+                    multi.append(1)
+                num = 0
+            elif i == ']':
+                res = multi.pop() * res
+                if stack:
+                    res = stack.pop() + res
+            elif i.isdigit():
+                num = num * 10 + int(i)
+            else:
+                res += i
+
+        return ''.join(stack) + res
+
+a = Solution().decodeString(
+"2[p4[2[j]]]")
 print(a)
