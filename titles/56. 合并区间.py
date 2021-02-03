@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-#!/usr/bin/env python
+# !/usr/bin/env python
 # -*- coding:utf-8 -*-
 # class Solution:
 #     def merge(self, intervals):
@@ -33,5 +33,21 @@ class Solution:
         return merged
 
 
-a=Solution().merge( [[1,4],[4,5],[6,9],[8,9],[3,9],[10,12]])
+class Solution:
+    def merge(self, intervals):
+        intervals.sort(key=lambda x: x[0])
+        i = 0
+        while 1:
+            if i > len(intervals) - 2:
+                break
+            if intervals[i][1] < intervals[i + 1][0]:
+                i += 1
+                continue
+            if intervals[i][1] >= intervals[i + 1][0]:
+                intervals[i] = [intervals[i][0], max(intervals[i][1], intervals[i + 1][1])]
+                intervals.pop(i + 1)
+        return intervals
+
+#
+a = Solution().merge([[1,4],[4,5]])
 print(a)
