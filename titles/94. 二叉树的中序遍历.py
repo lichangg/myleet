@@ -140,6 +140,21 @@ class Solution:
                 stack.append(node)
         return res
 
+# 再来一次二叉树的中序遍历
+class Solution:
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
+        stack = []
+        node = root
+        res = []
+        while stack or node:
+            while node:
+                stack.append(node)
+                node = node.left
+            node = stack.pop()
+            res.append(node.val)
+            node = node.right
+        return res
+
 
 b=create_BTree_By_List([1])
 a=Solution().inorderTraversal(b)

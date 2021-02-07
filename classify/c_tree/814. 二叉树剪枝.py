@@ -36,3 +36,13 @@ class Solution(object):
             return node.val == 1 or a1 or a2
 
         return root if containsOne(root) else None
+
+class Solution:
+    def pruneTree(self, root: TreeNode) -> TreeNode:
+        if not root or (root.val == 0 and not root.left and not root.right):
+            return None
+        root.left = self.pruneTree(root.left)
+        root.right = self.pruneTree(root.right)
+        if root.val == 0 and not root.left and not root.right:
+            return None
+        return root

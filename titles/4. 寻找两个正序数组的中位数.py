@@ -79,6 +79,35 @@ def helper(nums1, nums2, k):
     else:
         return helper(nums1[t:], nums2, k - t)
 
+
+# 重点题再刷
+# 思路1:直接就是归并后求中位数
+class Solution:
+    def findMedianSortedArrays(self, nums1, nums2) -> float:
+        def merge(n1, n2):
+            tmp = []
+            l1=len(n1)
+            l2=len(n2)
+            n1_point = 0
+            n2_point = 0
+            while n1_point < l1 and n2_point< l2:
+                while n1_point < l1 and n2_point< l2 and n1[n1_point]<n2[n2_point]:
+                    tmp.append(n1[n1_point])
+                    n1_point+=1
+                while n1_point < l1 and n2_point< l2 and n2[n2_point]<=n1[n1_point]:
+                    tmp.append(n2[n2_point])
+                    n2_point+=1
+            tmp.extend(n1[n1_point:])
+            tmp.extend(n2[n2_point:])
+            return tmp
+        n = merge(nums1,nums2)
+        l = len(n)
+        if l%2 == 0:
+            return (n[l//2] + n[l//2-1])/2
+        else:
+            return n[l//2]
+
+
 num1 = [1,3]
 num2 = [2]
 

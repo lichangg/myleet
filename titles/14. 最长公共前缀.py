@@ -78,6 +78,6 @@ class Solution:
         return str0
 
 
-a=Solution().longestCommonPrefix(["c","c"])
+a=Solution().longestCommonPrefix(["csa","cd","cs"])
 print(a)
 
