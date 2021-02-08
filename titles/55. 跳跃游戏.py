@@ -2,6 +2,9 @@
 # -*- coding:utf-8 -*-
 # 学到了
 #遍历得到每个点所能达到的最大位置
+from typing import List
+
+
 class Solution:
     def canJump(self, nums) :
         max_i = 0       #初始化当前能到达最远的位置
@@ -19,6 +22,19 @@ class Solution:
 
 
 
-
-a=Solution().canJump([2,3,1,0,0,4])
+# 再刷
+# 设dp[i]为当前位置最远能到达的位置
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        l = len(nums)
+        dp = [0] * l
+        i = 0
+        while i<l:
+            if i <= dp[i-1]:
+                dp[i] = max(nums[i]+i, dp[i-1])
+            else:
+                return False
+            i+=1
+        return True
+a=Solution().canJump([2,3,1,1,0,4])
 print(a)

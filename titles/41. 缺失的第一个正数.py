@@ -42,5 +42,19 @@ class Solution:
         else:
             return i+1
 
-a = Solution().firstMissingPositive([1,2,3])
+
+# 置换可满足空间O(1)
+class Solution:
+    def firstMissingPositive(self, nums: List[int]) -> int:
+        n = len(nums)
+
+        for i in range(n):
+            # 只有在(1,n)范围的数才有可能有用且它的正确位置索引需要是它的值-1, 其他范围内的数没用的, 另外还得满足即将交换的两个数不相等,相等会进入死循环
+            while 1 <= nums[i] <= n and nums[nums[i] - 1] != nums[i]:
+                nums[nums[i] - 1], nums[i] = nums[i], nums[nums[i] - 1]
+        for i in range(n):
+            if nums[i] != i + 1:
+                return i + 1
+        return n + 1
+
 print(a)

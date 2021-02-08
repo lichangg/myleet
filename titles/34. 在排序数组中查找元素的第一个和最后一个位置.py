@@ -98,5 +98,34 @@ class Solution:
 
             return [start, end]
 
-a = Solution().searchRange([1], 1)
+#再刷
+# 边界找的我想吐
+class Solution:
+    def searchRange(self, nums, target: int):
+        if not nums:return [-1,-1]
+        def mid_search(nums, start, end, target):
+            if end<start:
+                return None
+
+            mid = start+(end-start)//2
+            if target<nums[mid]:
+                return mid_search(nums, start, mid-1, target)
+            elif target > nums[mid]:
+                return mid_search(nums, mid+1, end, target)
+            else:
+                return mid
+        target_index = mid_search(nums, 0, len(nums)-1, target)
+        if target_index == None:
+            return [-1,-1]
+        else:
+            l = r = target_index
+            while l-1>=0 and nums[l-1] == target:
+                l-=1
+            while r+1<len(nums) and nums[r+1]==target:
+                r+=1
+
+            return [l, r]
+
+
+a = Solution().searchRange([1,1,2], 1)
 print(a)

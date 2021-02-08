@@ -48,6 +48,7 @@ class Solution:
         # -------------------------------------
         return res
 
+
 # 二刷超出时间限制, 上面滑动窗口的算法思路很简洁,但是问题在于怎么解决无关字符的问题
 # class Solution:
 #     def minWindow(self, s: str, t: str) -> str:
@@ -95,6 +96,45 @@ class Solution:
 #                 min_str = r
 #         return min_str
 
+# 再刷
+from collections import defaultdict
 
-a = Solution().minWindow("ADOBECEBANC", "ABC")
+
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
+        dic_need = defaultdict(int)
+        t_count = 0
+        for i in t:
+            dic_need[i] += 1
+            t_count +=1
+        min_len = float('inf')
+        min_str = ''
+
+        tmp = []
+        i = 0
+        l = len(s)
+        while i < l:
+            if s[i]in dic_need:
+                tmp.append(i)
+                if dic_need[s[i]] > 0:
+                    t_count -=1
+                dic_need[s[i]]-=1
+                if t_count == 0:
+                    start = tmp.pop(0)
+                    dic_need[s[start]] += 1
+                    if dic_need[s[start]] > 0:
+                        t_count += 1
+                    while t_count <= 0:
+                        start = tmp.pop(0)
+                        dic_need[s[start]]+=1
+                        if dic_need[s[start]] > 0:
+                            t_count +=1
+                        else:
+                            min_len = min(min_len, i - start + 1)
+                    if i-start+1<min_len:
+                        min_len = i-start+1
+                        min_str = s[start:i+1]
+            i+=1
+        return min_str
+a = Solution().minWindow("bba", "ab")
 print(a)

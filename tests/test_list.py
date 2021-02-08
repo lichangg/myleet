@@ -14,5 +14,6 @@
 # a.insert(-2, 3)
 # print(a)
 
-a=[1,2,3,4,5]
-print(a[3:1:-1])
+a=[1,2,3,1,5]
+a.remove(1)
+print(a)

@@ -44,12 +44,40 @@ class Solution:
         for i in range(len(word1)):
             for j in range(len(word2)):
                 if word1[i] == word2[j]:
-                    dp[i+1][j+1] = 1 + min(dp[i][j+1], dp[i+1][j], dp[i][j] - 1)
+                    dp[i + 1][j + 1] = 1 + min(dp[i][j + 1], dp[i + 1][j], dp[i][j] - 1)
                 else:
-                    dp[i+1][j+1] = 1 + min(dp[i][j+1], dp[i+1][j], dp[i][j])
+                    dp[i + 1][j + 1] = 1 + min(dp[i][j + 1], dp[i + 1][j], dp[i][j])
 
         return dp[-1][-1]
 
+
+# 再刷
+class Solution:
+    def minDistance(self, word1: str, word2: str) -> int:
+        word1 = ' ' + word1
+        word2 = ' ' + word2
+        m = len(word1)
+        n = len(word2)
+        dp = [[0] * n for _ in range(m)]
+
+        for x in range(m):
+            for y in range(n):
+                if x == 0:
+                    dp[x][y] = y
+                elif y == 0:
+                    dp[x][y] = x
+
+        i = 1
+        while i < m:
+            j = 1
+            while j < n:
+                if word1[i] == word2[j]:
+                    dp[i][j] = dp[i - 1][j - 1]
+                else:
+                    dp[i][j] = min(dp[i][j - 1], dp[i - 1][j], dp[i-1][j-1])+1
+                j += 1
+            i += 1
+        return dp[-1][-1]
 
 a = Solution().minDistance('horse', 'ros')
 print(a)

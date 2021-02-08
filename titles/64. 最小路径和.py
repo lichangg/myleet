@@ -46,6 +46,31 @@ class Solution:
             print(dp)
         return dp[-1]
 
+# 再刷, 直接路径压缩一步到位
+class Solution:
+    def minPathSum(self, grid) -> int:
+        m = len(grid)
+        n = len(grid[0])
+        if not n:
+            return 0
+        i= 1
+        initial = 0
+        res = []
+        for x in grid[0]:
+            initial+=x
+            res.append(initial)
+        while i<m:
+            j = 0
+            while j<n:
+                if j == 0:
+                    res[0] = grid[i][0] + res[0]
+                    j+=1
+                    continue
 
-a = Solution().minPathSum([[1, 3, 1], [1, 5, 1], [4, 2, 1]])
+                res[j] = min(res[j], res[j-1]) + grid[i][j]
+
+                j+=1
+            i+=1
+        return res[-1]
+a = Solution().minPathSum([[]])
 print(a)

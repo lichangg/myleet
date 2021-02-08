@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-#效率太低超时了
+# 效率太低超时了
 # class Solution:
 #     def threeSum(self, nums:list):
 #         res = []
@@ -81,7 +81,70 @@ class Solution:
         return ans
 
 
-a=Solution().threeSum([0,0,0])
+# 再刷
+# 深度搜素,超时
+# class Solution:
+#     def threeSum(self, nums):
+#         nums.sort()
+#         self.res = []
+#         def dfs(cur_sum, cur,path, begin, dis):
+#             new_path = path[::]
+#             new_path.append(cur)
+#             cur_sum +=cur
+#             if cur_sum == 0 and dis == 0:
+#                 self.res.append(new_path)
+#                 return
+#             if cur_sum > 0 or dis<0:
+#                 return
+#             pre= None
+#             for idx, i in enumerate(nums):
+#                 if idx<=begin or pre == i:
+#                     continue
+#                 else:
+#                     pre= i
+#                     dfs(cur_sum, i, new_path, idx, dis-1)
+#         #用一个pre变量记录是否和上一个元素一样, 当前的i不可和pre相同,否则会出现重复结果, 但是当前i可以作为pre的子节点
+#         pre = None
+#         for idx, i in enumerate(nums):
+#             if i == pre:
+#                 continue
+#             else:
+#                 pre =i
+#                 dfs(0, i, [], idx, 2)
+#
+#         return self.res
+
+# 再刷失败, 思路要是固定一个i,再双指针
+class Solution:
+    def threeSum(self, nums):
+        nums.sort()
+        i = 0
+        j = len(nums)-1
+        self.res = []
+
+        while i<j:
+            pre_i = nums[i]
+            pre_j = nums[j]
+            diff = 0 - nums[i] - nums[j]
+            third  = None
+            for idx, x in enumerate(nums[i+1:j]):
+                if x == diff:
+                    third = idx+i+1
+                    break
+                elif x> diff:
+                    break
+            if third:
+                self.res.append([nums[i], nums[j], nums[third]])
+            if diff > 0:
+                while pre_i == nums[i]:
+                    i+=1
+            else:
+                while pre_j == nums[j]:
+                    j-=1
+
+        return self.res
+
+a = Solution().threeSum( [-4, -1, -1, -1, -1, 0, 0, 0, 1, 1, 2, 2, 2, 3, 3, 4, 5, 7])
 print(a)
 # a=[0, 1, -1]
 # a.sort()

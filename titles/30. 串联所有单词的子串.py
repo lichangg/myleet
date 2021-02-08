@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
+# 重点题
 from typing import List
 
 
@@ -77,7 +78,7 @@ class Solution:
         while i <= s_len - word_len:
             temp_hashmap = hashmap.copy()
             j = i
-            while j <= s_len - word_len :
+            while j <= s_len - word_len:
                 cur_s = s[j:j + word_len]
                 if cur_s in temp_hashmap:
                     temp_hashmap[cur_s] -= 1
@@ -91,6 +92,7 @@ class Solution:
                 j += word_len
             i += 1
         return self.res
+
 
 # 别人写的优化,首先这是逐个单词搜素的,很厉害,学到了
 # 另外优化的点在于
@@ -116,22 +118,26 @@ class Solution:
             while lo <= lo_max:
                 tmp_dict = word_dict.copy()
                 match = True
-                for hi in range(lo + t_len, lo, -w_len):    # 从尾到头搜索单词
+                for hi in range(lo + t_len, lo, -w_len):  # 从尾到头搜索单词
                     word = s[hi - w_len: hi]
                     if word not in tmp_dict or tmp_dict.get(word, 0) == 0:
                         match = False
-                        break   # 当前单词不符合要求 直接停止这个子串的搜索
+                        break  # 当前单词不符合要求 直接停止这个子串的搜索
                     tmp_dict[word] -= 1
                 if match:
                     ans.append(lo)
-                lo = hi     # 对lo直接赋值 这就是相比法二优化的地方
+                lo = hi  # 对lo直接赋值 这就是相比法二优化的地方
         return ans
+a = Solution().findSubstring(  s = "barfoothefoobarman",
+  words = ["foo","bar"])
+print(a)
+
 
 # 别人的滑动窗口,时间略逊于上面的方法,以后再看
 class Solution:
     def findSubstring(self, s: str, words: List[str]) -> List[int]:
         from collections import Counter
-        if not s or not words:return []
+        if not s or not words: return []
         one_word = len(words[0])
         word_num = len(words)
         n = len(s)
@@ -148,14 +154,72 @@ class Solution:
                 cur_Counter[w] += 1
                 cur_cnt += 1
                 while cur_Counter[w] > words[w]:
-                    left_w = s[left:left+one_word]
+                    left_w = s[left:left + one_word]
                     left += one_word
                     cur_Counter[left_w] -= 1
                     cur_cnt -= 1
-                if cur_cnt == word_num :
+                if cur_cnt == word_num:
                     res.append(left)
         return res
 
 
-a = Solution().findSubstring("barfoothefoobarman", ["foo","bar"])
+# 再刷
+# 遇到类似这种直接陷进去"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab",['a','a','a','a','a','a','b']
+# class Solution:
+#     def findSubstring(self, s: str, words: List[str]) -> List[int]:
+#         tmp = []
+#         word_l = len(words[0])
+#         s_l = len(s)
+#         for i in range(0, s_l):
+#             copy_words = words[::]
+#             start = i
+#             while start + word_l < s_l+1 and copy_words:
+#                 cur_word = s[start:start+word_l]
+#                 if cur_word in copy_words:
+#                     copy_words.remove(cur_word)
+#                     start += word_l
+#                 else:
+#                     break
+#             else:
+#                 if not copy_words:
+#                     tmp.append(i)
+#         return tmp
+
+
+from collections import defaultdict
+import queue
+
+
+class Solution:
+    def findSubstring(self, s: str, words: List[str]) -> List[int]:
+        dic_need = defaultdict(int)
+        word_l = len(words[0])
+        s_l = len(s)
+        res = []
+        for i in words:
+            dic_need[i] += 1
+
+        for start in range(word_l):
+            q = queue.Queue()
+            for i in range(start, s_l, word_l):
+                cur_word = s[i:i + word_l]
+                if cur_word not in dic_need:
+                    if q.qsize() >= 1:
+                        dic_need[q.get_nowait()] += 1
+                    continue
+
+                dic_need[cur_word] -= 1
+                q.put(cur_word)
+                for k, v in dic_need.items():
+                    if v > 0:
+                        break
+                else:
+                    res.append(i - word_l * (len(words) - 1))
+                if q.qsize() >= 1:
+                    dic_need[q.get_nowait()] += 1
+        return res
+
+
+a = Solution().findSubstring(  s = "barfoothefoobarman",
+  words = ["foo","bar"])
 print(a)
