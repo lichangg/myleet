@@ -37,7 +37,7 @@
 # 1. 若s[0:i]已经是回文串(包含索引为i的字符), 那么dp[i]就直接等于0了
 # 2. 若s[0:i]不是回文串, 那就需要寻找切割点,遍历0到i的索引,设为j
 #   - 若s[j:i]已经是回文串了,算出dp[0:j]的切割数, 然后+1得到dp[i]的一个可能的值
-#   - 将这些可能的值取最小值就是dp[i]
+#   - 将这些可能的值取最小值就是dp[i]   (此处若用列表存这这些值最后算min好像还更快一点)
 # 3. 初始化的时候按最差的情况来, 即所以字符都要单独切割成回文串(注意啊!!!)
 class Solution:
     def minCut(self, s: str) -> int:
@@ -51,12 +51,12 @@ class Solution:
                 dp[i] = 0
                 continue
             # 枚举分割点
-            tmp = [dp[i]]
+            tmp = dp[i]
             for j in range(i):
                 tmps = s[j+1:i+1]
                 if tmps == tmps[::-1]:
-                    tmp.append(dp[j] + 1)
-            dp[i] = min(tmp)
+                    tmp = min(tmp, dp[j] + 1)
+            dp[i] = tmp
 
         return dp[size - 1]
 

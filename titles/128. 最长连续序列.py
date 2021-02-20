@@ -29,7 +29,7 @@ import collections
 class DSU:
     def __init__(self, nums):
         self.parent = {num: num for num in nums}
-        self.cnt = collections.defaultdict(lambda: 1)
+        self.cnt = collections.defaultdict(lambda: 1) # 初始化默认字典, 学到了
         # print(self.pre,self.cnt)
     #不进行路径压缩
     # def find(self, x):

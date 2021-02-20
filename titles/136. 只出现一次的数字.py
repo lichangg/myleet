@@ -21,6 +21,7 @@ class Solution:
         a=0
         while i<len(nums):
             a= nums[i]^a
+            i+=1
         return a
 a=Solution().singleNumber([4,4,2])
 print(a)

@@ -193,10 +193,68 @@ class Solution:
 
         return 0
 
+# 再刷
+# 这种方式过不了23号用例会超时,因为单词列表内的单词互相之间的距离进行了多次重复计算,如果能用cache存下各单词之间的距离就会好很多
+from collections import defaultdict
+class Solution:
+    def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
+        self.used= defaultdict(int)
+        self.min_path = float('inf')
+        def distance(w1, w2):
+            l = 0
+            w_len = len(w1)
+            dis = 0
+            while l < w_len and dis <=1:
+                if w1[l]!=w2[l]:
+                    dis+=1
+                l+=1
+            return dis
+
+        def dfs(cur_word, path):
+
+            self.used[cur_word] = 1
+            for word in wordList:
+                if distance(cur_word, endWord) == 0:
+                    self.min_path = min(self.min_path, path)
+
+                if not self.used[word] and distance(word,cur_word)==1:
+                    dfs(word, path+1)
+            self.used[cur_word] = 0
+        dfs(beginWord, 1)
+        if self.min_path == float('inf'):return 0
+        return self.min_path
+
+# 怪不得要用上队列, 先进先出
+# 这里巧妙的利用队列先进先出的特性进行BFS
+class Solution:
+    def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
+        def distance(w1, w2):
+            l = 0
+            w_len = len(w1)
+            dis = 0
+            while l < w_len and dis <=1:
+                if w1[l]!=w2[l]:
+                    dis+=1
+                l+=1
+            return dis
+        self.visited = set()
+        self.visited.add(beginWord)
+        li = collections.deque()
+        li.append((beginWord, 1))
+        while li:
+            word, dis = li.popleft()
+            for w in wordList:
+                if word == endWord:
+                    return dis
+                if w in self.visited:
+                    continue
+                elif distance(word,w)==1:
+                    self.visited.add(w)
+                    li.append((w, dis+1))
+
+        return 0
 
 a=Solution().ladderLength(
-beginWord = "hit",
-endWord = "cog",
-wordList = ["hot","dot","dog","lot","log","cog"]
+beginWord = "hit", endWord = "cog", wordList = ["hot","dot","dog","lot","log","cog"]
 )
 print(a)
