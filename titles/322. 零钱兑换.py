@@ -122,5 +122,45 @@ class Solution:
 #                 return l
 #         return -1
 
-a=Solution().coinChange([357,239,73,52],9832)
+# 再刷,广度搜素先试试,
+# 这样会导致很多达不到的remain重复计算,会超时
+from collections import deque
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        if amount == 0:return 0
+        coins.sort(reverse=True)
+        q = deque()
+        q.append((amount, 0))
+        while len(q) >= 1:
+            remain,level = q.popleft()
+            for i in coins:
+                if remain > i:
+                    q.append((remain-i, level+1))
+                elif remain == i:
+                    return level +1
+        return -1
+
+# dp[i]表示组成i需要的最少的数字个数
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        coins.sort()
+        dp = [-1] * (amount+1)
+        dp[0] = 0
+        for index in range(0,amount+1):
+            if dp[index] == -1:
+                continue
+            for coin in coins:
+                if index+coin>amount:
+                    break
+                if dp[index+coin]>=1:
+                    dp[index+coin] = min(dp[index+coin], dp[index]+1)
+                else:
+                    dp[index+coin] = dp[index] + 1
+
+        return dp[amount]
+
+
+a=Solution().coinChange(
+[357,239,73,52],
+9832)
 print(a)

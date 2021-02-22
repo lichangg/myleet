@@ -37,5 +37,5 @@ class Solution:
         return max(res, len(tasks))
 
 
-a=Solution().leastInterval(["A","A","B",'B','C','C'], 3)
+a=Solution().leastInterval(["A","A","A",'B','B','B'], 1)
 print(a)

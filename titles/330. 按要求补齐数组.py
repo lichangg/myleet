@@ -33,7 +33,9 @@ class Solution:
 
 
 
+# 再刷
 
 
-a=Solution().minPatches([1,5,10], 20)
+
+a=Solution().minPatches([1,5,100], 20)
 print(a)
