@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 # 思路1 暴力
+# 这也能让我给想出来, 不容易
 class Solution:
     def isSubsequence(self, s: str, t: str) -> bool:
         short = len(s)

@@ -30,5 +30,6 @@ class Solution:
 
         return [dic.get(x, -1) for x in nums1]
 
-a=Solution().nextGreaterElement([1,3,5,2,4],[6,5,8,3,6,1,7])
+# 注意num1里面的元素nums2都有,且他们都没有重复元素,所以在选测试用例的时候要注意
+a=Solution().nextGreaterElement([1,3,5],[6,5,8,3,6,1,7])
 print(a)

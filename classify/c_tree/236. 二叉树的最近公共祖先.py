@@ -3,6 +3,7 @@
 from utils.util_funcs import TreeNode,create_BTree_By_List
 
 # 虽然用深度遍历过了,但是实在不优雅
+# 虽然不优雅但是思路还是挺牛逼的, 真是秀儿
 class Solution:
     def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
         self.col_parent = None

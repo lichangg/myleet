@@ -7,6 +7,7 @@ from utils.util_funcs import ListNode, gen_list, enum_node
 1. 先写出每k个反转一次的方法
 2. 每k个反转之后拼接
 '''
+# titles下面我新写了递归解法更优雅
 class Solution:
     def rever(self,head, k):
         i = 0

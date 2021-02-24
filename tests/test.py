@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-a=1
+a=[1]
 def ddd(n):
-    n-=1
+    n.append(2)
     return n
 print(a)
 print(ddd(a))
