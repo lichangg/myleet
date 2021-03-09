@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+25#!/usr/bin/env python
 # -*- coding:utf-8 -*-
 # 二刷失败, 想的头晕
 from utils.util_funcs import ListNode, gen_list, enum_node

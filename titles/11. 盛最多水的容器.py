@@ -49,8 +49,9 @@ class Solution:
                 max_area = max(max_area, (r-l) * min(li[l], li[r]))
         return max_area
 
-
-
+# 再刷
+class Solution:
+    def maxArea(self, li) -> int:
 
 a = Solution().maxArea([1,1,1])
 print(a)

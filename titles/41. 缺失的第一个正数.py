@@ -57,4 +57,5 @@ class Solution:
                 return i + 1
         return n + 1
 
+a=Solution().firstMissingPositive([12,7,1,2,8,9,11])
 print(a)
