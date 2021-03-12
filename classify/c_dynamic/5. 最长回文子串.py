@@ -88,6 +88,6 @@ class Solution:
 
         return max_palindrome
 
-
+# 思路2:动态规划
 a = Solution().longestPalindrome("ccc")
 print(a)

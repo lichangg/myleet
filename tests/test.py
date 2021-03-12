@@ -1,9 +1,5 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-a=[1]
-def ddd(n):
-    n.append(2)
-    return n
-print(a)
-print(ddd(a))
-print(a)
+a='123'
+print(a[0:3])
+print(a[3::-1])

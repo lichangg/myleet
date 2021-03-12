@@ -64,7 +64,32 @@ class Solution:
 
         return dummy.next
 
+# 再刷
+class Solution:
+    def reverseKGroup(self, head: ListNode, k: int) -> ListNode:
+        count = 0
+        cur = head
+        while cur:
+            cur = cur.next
+            count+=1
+        if count <k:
+            return head
+
+        dummy = ListNode(0)
+        cur = head
+        dummy.next = cur
+        count = 0
+        pre=None
+        while count <k:
+            tmp = cur.next
+            cur.next = pre
+
+            pre = cur
+            cur = tmp
+            count +=1
+        dummy.next.next = self.reverseKGroup(cur, k)
+        return pre
 
 node = gen_list([1, 2, 3, 4, 5])
-a = Solution().reverseKGroup(node, 3)
+a = Solution().reverseKGroup(node, 2)
 enum_node(a)

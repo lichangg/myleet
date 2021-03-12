@@ -119,32 +119,43 @@ class Solution:
     def threeSum(self, nums):
         nums.sort()
         i = 0
-        j = len(nums)-1
+        j = len(nums) - 1
         self.res = []
 
-        while i<j:
+        while i < j:
             pre_i = nums[i]
             pre_j = nums[j]
             diff = 0 - nums[i] - nums[j]
-            third  = None
-            for idx, x in enumerate(nums[i+1:j]):
+            third = None
+            for idx, x in enumerate(nums[i + 1:j]):
                 if x == diff:
-                    third = idx+i+1
+                    third = idx + i + 1
                     break
-                elif x> diff:
+                elif x > diff:
                     break
             if third:
                 self.res.append([nums[i], nums[j], nums[third]])
             if diff > 0:
                 while pre_i == nums[i]:
-                    i+=1
+                    i += 1
             else:
                 while pre_j == nums[j]:
-                    j-=1
+                    j -= 1
 
         return self.res
 
-a = Solution().threeSum( [-4, -1, -1, -1, -1, 0, 0, 0, 1, 1, 2, 2, 2, 3, 3, 4, 5, 7])
+
+# 再刷
+class Solution:
+    def threeSum(self, nums):
+        res = []
+        for i in nums:
+            for j in nums:
+                if -j - i in nums:
+                    res.append((i, j, -i - j))
+        return res
+
+a = Solution().threeSum([-4, -1, -1, -1, -1, 0, 0, 0, 1, 1, 2, 2, 2, 3, 3, 4, 5, 7])
 print(a)
 # a=[0, 1, -1]
 # a.sort()

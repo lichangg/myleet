@@ -58,10 +58,33 @@ class Solution:
                     dp[i][j] = min(dp[i - 1][j], dp[i - 1][j - 1], dp[i][j - 1]) + 1
         return max(list(map(max, dp))) ** 2
 
+# 再刷
+class Solution:
+    def maximalSquare(self, matrix: List[List[str]]) -> int:
+        m = len(matrix)
+        n = len(matrix[0])
+        dp = [[0] * n for _ in range(m)]
+        i = 0
+        max_side = 0
+        while i< m:
+            j = 0
+            while j<n:
+                if i == 0 or j==0:
+                    dp[i][j] = 1 if matrix[i][j] == '1' else 0
+                    max_side = max(dp[i][j], max_side)
+                else:
+                    if matrix[i][j] == '1':
 
-a = Solution().maximalSquare(matrix=[["0","0","0","1"],
-                                     ["1","1","0","1"],
-                                     ["1","1","1","1"],
-                                     ["0","1","1","1"],
-                                     ["0","1","1","1"]])
+                        dp[i][j] = min(dp[i-1][j], dp[i-1][j-1], dp[i][j-1]) + 1
+                        max_side = max(dp[i][j], max_side)
+
+                    else:
+                        dp[i][j] = 0
+                j+=1
+            i+=1
+        return max_side ** 2
+a = Solution().maximalSquare(matrix=[["0","1"],
+                                     ["1","0"]])
+
+
 print(a)
