@@ -19,36 +19,39 @@
 # 自己瞎写的排序+双指针的方法，复杂度O(N**2)看别人的题解好像最快也就这样了
 # 执行用时：1372 ms, 在所有 Python3 提交中击败了15.34%的用户
 # 内存消耗：16.3 MB, 在所有 Python3 提交中击败了53.96%的用户
-# class Solution:
-#     def threeSum(self, nums:list ,target=0):
-#         res = []
-#         nums.sort()
-#         if len(nums) == 3:
-#             if nums[0] + nums[1] + nums[2] == target:
-#                 res = [nums]
-#             return res
-#         for i in range(len(nums)-2):
-#             if i > 0 and nums[i] == nums[i-1]:
-#                 continue
-#             l=i+1
-#             r = len(nums) - 1
-#             while l < r:
-#                 if nums[i] + nums[l] + nums[r] == target:
-#                     res.append([nums[i], nums[l], nums[r]])
-#                     while l<r and nums[l]==nums[l+1]:
-#                         l+=1
-#                     while l<r and nums[r]==nums[r-+1]:
-#                         r-=1
-#                     l += 1
-#                     r -= 1
-#                 elif nums[i] + nums[l] + nums[r] <target:
-#                     l+=1
-#                 else:
-#                     r-=1
-#
-#         return res
+class Solution:
+    def threeSum(self, nums:list ,target=0):
+        res = []
+        nums.sort()
+        if len(nums) == 3:
+            if nums[0] + nums[1] + nums[2] == target:
+                res = [nums]
+            return res
+        for i in range(len(nums)-2):
+            if i > 0 and nums[i] == nums[i-1]:
+                continue
+            l=i+1
+            r = len(nums) - 1
+            while l < r:
+                if nums[i] + nums[l] + nums[r] == target:
+                    res.append([nums[i], nums[l], nums[r]])
+                    while l<r and nums[l]==nums[l+1]:
+                        l+=1
+                    while l<r and nums[r]==nums[r-+1]:
+                        r-=1
+                    l += 1
+                    r -= 1
+                elif nums[i] + nums[l] + nums[r] <target:
+                    l+=1
+                else:
+                    r-=1
+
+        return res
 
 # 别人的方法
+from typing import List
+
+
 class Solution:
     def threeSum(self, nums):
         n = len(nums)
@@ -144,7 +147,37 @@ class Solution:
 
         return self.res
 
-a = Solution().threeSum( [-4, -1, -1, -1, -1, 0, 0, 0, 1, 1, 2, 2, 2, 3, 3, 4, 5, 7])
+
+
+# 再刷,代码上可以再优化
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        nums.sort()
+        size = len(nums)
+        res = []
+        for idx, n in enumerate(nums):
+            # 这个跳出判断是很优化性能的！！！
+            if idx > 0 and n == nums[idx-1]:
+                continue
+            l = idx+1
+            r = size-1
+            while l<r:
+                # 这里写while看起来较为复杂，还不如我之前瞎写的代码
+                while l< r and n+nums[l]+nums[r]<0:
+                    l +=1
+                while l<r and n+nums[l]+nums[r]>0:
+                    r-=1
+                if l>=r:
+                    break
+                if nums[l]+nums[r]+n == 0:
+                    res.append((n,nums[l],nums[r]))
+                    l+=1
+
+
+        return res
+
+a = Solution().threeSum(
+[-4,-1,-1,0,1,2])
 print(a)
 # a=[0, 1, -1]
 # a.sort()

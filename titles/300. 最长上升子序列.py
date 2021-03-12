@@ -44,5 +44,29 @@ class Solution:
 
 # 二刷失败
 
-a = Solution().lengthOfLIS([10, 9, 2, 5, 3, 7, 21, 18])
+
+# 再刷，先用单调栈试试
+# class Solution:
+#     def lengthOfLIS(self, nums: List[int]) -> int:
+#         stack = []
+#         l = len(nums)
+#         self.max = 0
+#         for i in range(l):
+#             flag = True
+#             while stack and nums[stack[-1]]>nums[i]:
+#                 if flag:
+#                     self.max = max(self.max, len(stack))
+#                     flag = False
+#                 stack.pop()
+#             if not stack or stack[-1] != nums[i]:
+#                 stack.append(i)
+#         self.max = max(self.max, len(stack))
+#         return self.max
+# 单调栈失败
+# 用动态规划试试， 一定要注意dp数组的含义，否则会很麻烦
+# dp[i] 的含义为以索引为i的元素为终点的最长递增序列长度（之前想着以i为起点，这会很不方便）
+# 再刷失败
+
+
+a = Solution().lengthOfLIS([1,3,-7,-4,-3,1])
 print(a)

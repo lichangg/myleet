@@ -19,6 +19,8 @@ class Solution:
 
         self.res = 0
 
+
+
         def lrd(node):
             if node is None:
                 return 1  # 空节点不需要被人拍也不用拍别人，直接返回被拍了就好
