@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
+# 我这思路牛逼,单调栈+快排
 class Solution:
     def nextPermutation(self, nums) -> None:
 

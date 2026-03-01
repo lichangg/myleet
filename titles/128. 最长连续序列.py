@@ -75,5 +75,61 @@ class Solution:
         return res
 
 # 二刷失败， 好好看看上面的几个解法，非常精妙
-a=Solution().longestConsecutive([5,6, 1, 2, 3,4])
+
+# 再刷, 先用并查集
+from collections import Counter
+
+# 由于有两层for循环, 复杂度过高
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        if not nums:return 0
+        nums = list(set(nums))
+        n = len(nums)
+        uf = UF(n)
+        # 没必要两层,反正后面都会find压缩路径
+        for i in range(n):
+            for j in range(i+1, n):
+                if abs(nums[i] - nums[j]) == 1:
+                    uf.union(i, j)
+        for i in range(n):
+            uf.find(i)
+
+        a=Counter(uf.res)
+        c=a.most_common(1)
+        return c[0][1]
+
+# 改进成下面这样
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        if not nums:return 0
+        nums = list(set(nums))
+        n = len(nums)
+        uf = UF(n)
+        for idx, i in enumerate(nums):
+            if i -1 in nums:
+                uf.union(idx, nums.index(i-1))
+        for i in range(n):
+            uf.find(i)
+
+        a=Counter(uf.res)
+        c=a.most_common(1)
+        return c[0][1]
+
+class UF:
+    def __init__(self, n):
+        self.res = [i for i in range(n)]
+        self.max_len = 1
+    def find(self, x):
+        if self.res[x] != x:
+            self.res[x] = self.find(self.res[x])
+        return self.res[x]
+    def union(self, x, y):
+        x, y = self.find(x), self.find(y)
+        if x != y:
+            self.res[x] = y
+
+
+
+a=Solution().longestConsecutive(
+[0,3,7,2,5,8,4,6,0,1])
 print(a)

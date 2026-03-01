@@ -42,5 +42,20 @@ class Solution(object):
         dfs('', '(')
         return self.res
 
-a = Solution().generateParenthesis(4)
+# 再刷, 思路异常清晰, 牛逼
+class Solution(object):
+    def generateParenthesis(self, n):
+        self.res = []
+        def dfs(s, cur, l_count, r_count):
+            if l_count < r_count or l_count > n:
+                return
+            new_s = s + cur
+            if l_count == r_count == n:
+                self.res.append(new_s)
+                return
+            dfs(new_s, '(', l_count+1, r_count)
+            dfs(new_s, ')', l_count, r_count+1)
+        dfs('', '(', 1, 0)
+        return self.res
+a = Solution().generateParenthesis(3)
 print(a)

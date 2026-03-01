@@ -111,7 +111,7 @@ class Solution:
                     x, y = c+dx, r+dy
                     if 0<=x<m and 0<=y<n and not used[x][y]:
                         flag = flag or dfs(x, y, location+1)
-                # 回溯状态返回， 此字符可再次被使用
+                # 回溯状态返回， 此字符可再次被使用. 重点
                 used[c][r] = 0
             return flag
         # 遍历二维网格中的每一个字符

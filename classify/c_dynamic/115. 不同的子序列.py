@@ -48,20 +48,44 @@ class Solution:
         t = ' ' + t
         lens = len(s)
         lent = len(t)
-        dp = [[0] * lens if i != 0 else [1] *lens for i in range(lent)]
+        dp = [[0] * lens if i != 0 else [1] * lens for i in range(lent)]
 
         i = 1
-        while i< len(t):
-            j=0
+        while i < len(t):
+            j = 0
             while j < len(s):
                 if s[j] == t[i]:
-                    dp[i][j] = dp[i-1][j-1] + dp[i][j-1]
+                    dp[i][j] = dp[i - 1][j - 1] + dp[i][j - 1]
                 else:
-                    dp[i][j] = dp[i][j-1]
+                    dp[i][j] = dp[i][j - 1]
+                j += 1
+            i += 1
+        return dp[-1][-1]
+
+
+# 再刷
+class Solution:
+    def numDistinct(self, s: str, t: str) -> int:
+        s, t = ' ' + s, ' ' + t
+        l1 = len(s)
+        l2 = len(t)
+        dp = [[0] * l1 for _ in range(l2)]
+        i = 0
+        while i<l2:
+            j = 0
+            while j<l1:
+                if i == 0:
+                    dp[i][j] = 1
+                elif j == 0:
+                    dp[i][j] = 0
+                else:
+                    if t[i] == s[j]:
+                        dp[i][j] = dp[i-1][j-1] + dp[i][j-1]
+                    else:
+                        dp[i][j] = dp[i][j-1]
                 j+=1
             i+=1
         return dp[-1][-1]
 
-
-a = Solution().numDistinct(s = "rabbbit", t = "rabbit")
+a = Solution().numDistinct(s="rabbbit", t="rabbit")
 print(a)

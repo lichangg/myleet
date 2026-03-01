@@ -36,5 +36,7 @@ class Solution:
                 return False
             i+=1
         return True
+
+
 a=Solution().canJump([2,3,1,1,0,4])
 print(a)

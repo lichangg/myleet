@@ -34,20 +34,40 @@ class Solution:
         dp = [[0] * (n2 + 1) for _ in range(n1 + 1)]
         # 第一行
         for j in range(1, n2 + 1):
-            dp[0][j] = dp[0][j-1] + 1
+            dp[0][j] = dp[0][j - 1] + 1
         # 第一列
         for i in range(1, n1 + 1):
-            dp[i][0] = dp[i-1][0] + 1
+            dp[i][0] = dp[i - 1][0] + 1
         for i in range(1, n1 + 1):
             for j in range(1, n2 + 1):
-                if word1[i-1] == word2[j-1]:
-                    dp[i][j] = dp[i-1][j-1]
+                if word1[i - 1] == word2[j - 1]:
+                    dp[i][j] = dp[i - 1][j - 1]
                 else:
-                    dp[i][j] = min(dp[i][j-1], dp[i-1][j], dp[i-1][j-1] ) + 1
-        #print(dp)
+                    dp[i][j] = min(dp[i][j - 1], dp[i - 1][j], dp[i - 1][j - 1]) + 1
+        # print(dp)
         return dp[-1][-1]
 
 
+# 再刷
+class Solution:
+    def minDistance(self, word1: str, word2: str) -> int:
+        word1, word2 = ' '+word1, ' '+word2
+        ls1 = len(word1)
+        ls2 = len(word2)
+        dp = [[0] * ls1 for _ in range(ls2)]
+        i = 0
+        while i < ls2:
+            j = 0
+            while j < ls1:
+                if i == 0 or j == 0:
+                    dp[i][j] = i or j
+                else:
+                    dp[i][j] = dp[i - 1][j - 1] if word1[j] == word2[i] else min(dp[i][j - 1], dp[i - 1][j],
+                                                                                         dp[i - 1][j - 1]) + 1
+                j += 1
+            i += 1
+        return dp[-1][-1]
 
-a = Solution().minDistance(word1 = "horse", word2 = "ros")
+
+a = Solution().minDistance(word1 = "intention", word2 = "execution")
 print(a)

@@ -75,5 +75,22 @@ class Solution:
 # 参考这个: https://leetcode-cn.com/problems/longest-valid-parentheses/solution/dong-tai-gui-hua-si-lu-xiang-jie-c-by-zhanganan042/
 # 最重要的是要定义动态规划数组的意义
 # 设dp 数组，其中第 i 个元素表示以下标为 i 的字符[结尾!]的[最长有效!]子字符串的长度。 (这句话需要仔细理解)
-a = Solution().longestValidParentheses('()')
+
+# 再刷
+class Solution:
+    def longestValidParentheses(self, s: str) -> int:
+        stack = [-1]
+        self.max = 0
+        for idx, i in enumerate(s):
+            if i == '(':
+                stack.append(idx)
+            else:
+                if stack[-1] != -1 and s[stack[-1]] == '(':
+                    stack.pop()
+                    self.max = max(self.max, idx - stack[-1])
+                else:
+                    stack.append(idx)
+
+        return self.max
+a = Solution().longestValidParentheses('))')
 print(a)
