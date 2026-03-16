@@ -70,6 +70,7 @@ class Solution:
         return dp(amount) or -1
 
 # 思路3 还是动态规划, 只不过这次是填动态规划的数组,定义dp[i]为构建amount=i的金额所需要的最少硬币数
+# 注意用coin做外循环遍历，而不是amount，因为很多得不到的amount其实是无关的
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
         dp = [float('inf')] * (amount + 1)
@@ -79,6 +80,8 @@ class Solution:
             for x in range(coin, amount + 1):
                 dp[x] = min(dp[x], dp[x - coin] + 1)
         return dp[amount] if dp[amount] != float('inf') else -1
-a=Solution().coinChange([8,7,5,1],
-19)
+
+
+a=Solution().coinChange([1,2,5],
+11)
 print(a)

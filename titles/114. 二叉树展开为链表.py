@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+1#!/usr/bin/env python
 # -*- coding:utf-8 -*-
 from utils.util_funcs import TreeNode,create_BTree_By_List
 # 学到了

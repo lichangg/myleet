@@ -20,9 +20,6 @@ class Solution:
 
         return dps[-1][-1]
 
-# 进一步压缩空间 //todo
-class Solution:
-    def uniquePaths(self, m: int, n: int) -> int:
 
 a=Solution().uniquePaths(m = 3, n = 7)
 print(a)

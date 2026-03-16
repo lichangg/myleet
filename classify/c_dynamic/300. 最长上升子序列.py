@@ -20,10 +20,26 @@ class Solution:
                     dp[i] = max(dp[i], dp[j] + 1)
         return max(dp)
 
+# 企图用动态规划+单调栈失败
+# class Solution:
+#     def lengthOfLIS(self, nums: List[int]) -> int:
+#         if not nums: return 0
+#         dp = [1] * len(nums)
+#         stack = []
+#         for i in range(len(nums)):
+#             if nums[i] > nums[i-1]:
+#                 dp[i] = dp[i-1] + 1
+#                 stack.append(i)
+#             else:
+#                 tmp_stack = []
+#                 while stack and nums[stack[-1]] < nums[i]:
+#                     idx = stack.pop()
+#                     tmp_stack.append(dp[idx])
+#                 dp[i] = max(tmp_stack) + 1 if tmp_stack else 1
+#                 stack.append(i)
+#         return dp[-1]
 
 
-
-
-
-a=Solution().lengthOfLIS([10,9,2,5,3,7,101,18])
+# a=Solution().lengthOfLIS([10,9,2,5,3,7,101,18])
+a=Solution().lengthOfLIS([0,1,0,3,2,3])
 print(a)

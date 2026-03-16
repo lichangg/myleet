@@ -25,7 +25,7 @@ class Solution:
             max_profit = max(dp[i][2], dp[i][3], max_profit)
             i+=1
         return max_profit
-# 其实可以不用上述4中状态, 只需要持有股票和不持有股票两种状态就行了
+# 其实可以不用上述4中状态, 只需要持有股票和不持有股票两种状态就行了, 0是不持有(也就是卖出了或者没有低价)，1是持有
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
         l = len(prices)

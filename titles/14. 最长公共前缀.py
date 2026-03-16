@@ -67,6 +67,8 @@ class Solution:
         return cur_prefix
 
 # 这是个取巧的办法的， 找出最长和最短的，其公共前缀就是整个数组字符串的公共前缀（为啥不是最短的和次短的）
+# 之前理解错了。这里是找出字符串序列最大的和最小的，其公共前缀就是整个数组字符串的公共前缀
+
 class Solution:
     def longestCommonPrefix(self, strs: List[str]) -> str:
         if not strs: return ""

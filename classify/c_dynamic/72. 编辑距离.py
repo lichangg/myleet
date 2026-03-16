@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+ #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 # 初始化失败
 # class Solution:
@@ -71,3 +71,17 @@ class Solution:
 
 a = Solution().minDistance(word1 = "intention", word2 = "execution")
 print(a)
+
+"""
+给你两个单词 word1 和 word2， 请返回将 word1 转换成 word2 所使用的最少操作数  。
+
+你可以对一个单词进行如下三种操作：
+
+插入一个字符
+删除一个字符
+替换一个字符
+"""
+
+
+class Solution:
+    def minDistance(self, word1: str, word2: str) -> int:
