@@ -51,6 +51,30 @@ class Solution:
             cur = temp
         return pre
 
+# 再刷,迭代
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        cur = head
+        pre=None
+        while cur:
+            tmp = cur.next
+            cur.next = pre
+
+            pre = cur
+            cur = tmp
+        return pre
+
+# 再刷，递归
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        def recur(node, pre):
+            if not node.next:
+                node.next = pre
+                return
+
+
+        cur.next = self.reverseList(head)
+
 b=gen_list([])
 a=Solution().reverseList(b)
 enum_node(a)

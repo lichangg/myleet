@@ -181,6 +181,18 @@ class Solution:
             stack.append(i)
         return ans
 
+class Solution:
+    def trap(self, height: List[int]) -> int:
+        stack = [-1]
+        sum_area = 0
+        for idx,i in enumerate(height):
+            while stack[-1] != -1 and height[stack[-1]]<i:
+                low = stack.pop()
+                if stack[-1] != -1:
+                    h = min(i, height[stack[-1]])
+                    sum_area+=(h-height[low]) * (idx - stack[-1]-1)
+            stack.append(idx)
+        return sum_area
 
 a = Solution().trap([0,1,0,2,1,0,1,3,2,1,2,1])
 # a = Solution().get_area([3])

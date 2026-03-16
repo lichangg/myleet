@@ -67,5 +67,25 @@ class Solution:
         return dp[amount]
 
 
+"""
+还是这个思路好理解
+本题思路和 322. 零钱兑换 一样，定义 dfs(i,c) 表示用前 i 种硬币组成金额 c 的方案数，考虑「选或不选」，有：
+
+不再继续选第 i 种硬币：dfs(i−1,c)。
+继续选一枚第 i 种硬币：dfs(i,c−coins[i])。
+
+"""
+class Solution:
+    def change(self, amount: int, coins: List[int]) -> int:
+        @cache  # 缓存装饰器，避免重复计算 dfs 的结果（记忆化）
+        def dfs(i: int, c: int) -> int:
+            if i < 0:
+                return 1 if c == 0 else 0
+            if c < coins[i]:  # 只能不选
+                return dfs(i - 1, c)
+            # 不选 + 继续选
+            return dfs(i - 1, c) + dfs(i, c - coins[i])
+
+        return dfs(len(coins) - 1, amount)
 a=Solution().change(3,[1,2])
 print(a)

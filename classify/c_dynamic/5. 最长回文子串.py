@@ -87,7 +87,26 @@ class Solution:
             i += 1
 
         return max_palindrome
+# 再刷
+class Solution:
+    def longestPalindrome(self, A):
+        n=len(A)
+        i = 0
+        self.max_len = float('-inf')
 
-# 思路2:动态规划
-a = Solution().longestPalindrome("ccc")
+        def getlen(start, end):
+            while start >= 0 and end <= n - 1 and A[start] == A[end]:
+                start -= 1
+                end += 1
+            return end - start -1
+
+        while i < n:
+            l1 = getlen(i, i)
+            l2 = getlen(i, i + 1)
+            self.max_len = max(l1, l2, self.max_len)
+            i+=1
+
+        return self.max_len
+
+a = Solution().longestPalindrome("accca")
 print(a)

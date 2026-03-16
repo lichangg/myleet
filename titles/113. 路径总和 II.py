@@ -42,6 +42,10 @@ class Solution:
             dfs(root.right, path[:], cur_sum)
         dfs(root, [], 0)
         return self.res
+
+
+
+
 b=Tree()
 [b.add(i)for i in [0,1]]
 
